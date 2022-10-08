@@ -44,6 +44,18 @@ border-radius:20px;
 pz.id = "sap"
 document.body.append(pz)
 
+class AimLock {
+    constructor(angle) {
+        this.angle = angle
+    }
+    start() {
+        this.int = setInterval(()=>socketsender([["2"],[this.angle]]),1);
+    }
+    stop() {
+        clearInterval(this.int);
+    }
+}
+
 
 window.addEventListener("keydown",function (e) {
     switch (e.keyCode) {
@@ -745,6 +757,11 @@ Get PID [${c[1]}]
                 ObjectDataa.x = ObjectData[1]
                 ObjectDataa.y = ObjectData[2]
                 if (dist(ObjectDataa) < 92) {
+                    let aimer = new AimLock(ObjectData[3])
+                    aimer.start()
+                    setTimeout(()=>{
+                        aimer.stop()
+                    },speeds[myPlayer.weapon]*5);
                     for (let i = 0;i<5;i++) {
                         for (let a=0;a<361;a+=30) sendws([spikeType,millType,boostType,wallType][i],a/180/Math.PI)
                     }
