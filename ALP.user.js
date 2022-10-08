@@ -56,7 +56,7 @@ function ezpz() {
          path = Math.atan2((myPlayer.y - enemy.y), (myPlayer.x - enemy.x))
          sendws(spikeType,path + 1.3);
          sendws(spikeType,path - 1.3);
-    },37);
+    },dist(enemy) / 3);
 }
 
 class AimLock {
@@ -391,7 +391,7 @@ setInterval(()=>{
     window.defaultHat = 6;
     window.defaultAccessory = 21
 },45);
-let aD = 85;
+let aD = 10;
 function updateHealStuff() {
     if (shameCount == 0 || shameCount == 2 || shameCount == 4 || shameCount == 6) {
         autoq = aD;
