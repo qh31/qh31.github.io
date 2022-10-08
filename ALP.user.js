@@ -29,6 +29,7 @@ Helper: ! pegas
 Optimisations:Apple
 Dont try to skid or ill 10-0 u ez
 **/
+
 let pz = document.createElement("div")
 pz.style = `
 z-index:9999999999999;
@@ -1137,7 +1138,7 @@ setInterval(() => {
         var newurl = location.href.split("?")[0]
         window.location.href = newurl + "?n=" + Math.floor(Math.random() * 900000000);
     }
-
+    window.requestAnimationFrame = async a => (ab) => ab
 }, 100);
 var ezsound = new Audio("https://cdn.discordapp.com/attachments/995042643128098930/995647198463262720/RIP.mp3");
 
