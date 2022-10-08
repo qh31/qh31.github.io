@@ -12,7 +12,7 @@
 // @exclude      *://*.ru/*
 // @exclude      *://*.to/*
 // @exclude      *://*.net/*
-// @version      4.7
+// @version      4.8
 // @require      
 // @require https://cdn.jsdelivr.net/npm/msgpack-lite@0.1.26/dist/msgpack.min.js
 // @grant  unsafeWindow
@@ -53,6 +53,11 @@ window.addEventListener("keydown",function (e) {
             break;
         case 192:
             play()
+            break;
+        case 78:
+            sendws(millType,myPlayer.dir - Math.PI - 1.4)
+            sendws(millType,myPlayer.dir + Math.PI + 1.4)
+            sendws(millType,myPlayer.dir - Math.PI);
             break;
     }
 })
@@ -364,7 +369,7 @@ function updateHealStuff() {
     if (shameCount == 0 || shameCount == 2 || shameCount == 4 || shameCount == 6) {
         autoq = aD;
     } else {
-        autoq = -40;
+        autoq = 10;
     }
 }
 
@@ -7621,20 +7626,12 @@ try {
                 const Ct = (e = null) => {
 
                     updateHealStuff()
-                    (
-                        (Date.now() - lastHeal < 120) ? function(){
-                            shameCount++;
-                        } : function(){
-                            shameCount--;
-                        },
-                        lastHeal = Date.now()
-                    )
-                    shameCount > 3 && scroll()
+                   
                     autoSolidier=true;
                     if (!he || Z || !_ || G <= 0 || G >= 100) return;
                     let t = null;
                     const r = () => {
-                        shameCount > 3 && scroll()
+                        
 
                         if (!he || Z || !_ || G <= 0 || G >= 100) return;
                         null !== t && Mt.delete(t);
@@ -7649,7 +7646,7 @@ try {
                     if (null === e) r();
                     else {
                         const n = setTimeout(r, e);
-                        shameCount > 3 && scroll()
+                        
                         t = n, Mt.add(n)
                     }
                 };
