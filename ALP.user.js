@@ -376,12 +376,12 @@ setInterval(()=>{
     window.defaultHat = 6;
     window.defaultAccessory = 21
 },45);
-let aD = 40;
+let aD = 85;
 function updateHealStuff() {
     if (shameCount == 0 || shameCount == 2 || shameCount == 4 || shameCount == 6) {
         autoq = aD;
     } else {
-        autoq = 10;
+        autoq = -70;
     }
 }
 
