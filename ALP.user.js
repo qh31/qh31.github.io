@@ -44,6 +44,21 @@ border-radius:20px;
 pz.id = "sap"
 document.body.append(pz)
 
+function ezpz() {
+    // Noobs now think about me skidding ezlol
+    // When i didn't skidded a shit here
+    sendws(spikeType,myPlayer.dir - Math.PI - 1.3);
+    sendws(spikeType,myPlayer.dir + Math.PI + 1.3);
+    // ezzz everyone XD
+    let path = Math.atan2((myPlayer.y - enemy.y), (myPlayer.x - enemy.x))
+    socketsender([["33"],[path]])
+    setTimeout(()=>{
+         path = Math.atan2((myPlayer.y - enemy.y), (myPlayer.x - enemy.x))
+         sendws(spikeType,path + 1.3);
+         sendws(spikeType,path - 1.3);
+    },37);
+}
+
 class AimLock {
     constructor(angle) {
         this.angle = angle
@@ -772,7 +787,7 @@ Get PID [${c[1]}]
             }
             if (ObjectData[6] == 15 && ObjectData[7] == myPlayer.id) {
                 itemIds.push(ObjectData[0])
-                if (dist({x:ObjectData[1],y:ObjectData[2]}) < 120) sendws(spikeType)
+                if (dist({x:ObjectData[1],y:ObjectData[2]}) < 120) ezpz();
             }
         }
     }
@@ -1055,7 +1070,9 @@ setInterval(function() {
     }
     window.config.skinColors = ["#bf8f54", "#cbb091", "#896c4b", "#fadadc", "#ececec", "#c37373", "#4c4c4c", "#ecaff7", "#738cc3", "#8bc373"];
     unsafeWindow.config.skinColors = ["#bf8f54", "#cbb091", "#896c4b", "#fadadc", "#ececec", "#c37373", "#4c4c4c", "#ecaff7", "#738cc3", "#8bc373"];
-
+    if (dist(enemy) < 450) {
+        sendws(boostType)
+    }
 },70);
 
 
