@@ -72,21 +72,37 @@ class AimLock {
         clearInterval(this.int);
     }
 }
-
+window.addEventListener('mousedown',(e)=>{
+    if (e.button == 2) {
+        storeBuy(40);
+        storeEquip(40);
+        socketsender([["5"],[10,true]])
+        socketsender([["c"],[1,Number.MAX_VALUE]])
+    }
+});
+window.addEventListener('mouseup',(e)=>{
+    if (e.button == 2) {
+        storeBuy(11);
+        storeEquip(11);
+        socketsender([["5"],[primary,true]])
+        socketsender([["c"],[0,null]])
+    }
+});
 
 window.addEventListener("keydown",function (e) {
     switch (e.keyCode) {
         case 82:
             aI = !aI;
             cjt(`${aI ? "0n" : "0ff"}`)
+            window.insta()
             break;
         case 192:
             play()
             break;
         case 78:
-            sendws(millType,myPlayer.dir - Math.PI - 1.4)
-            sendws(millType,myPlayer.dir + Math.PI + 1.4)
-            sendws(millType,myPlayer.dir - Math.PI);
+            sendws(millType,myPlayer.dir - 1.2)
+            sendws(millType,myPlayer.dir + 1.2)
+            sendws(millType,myPlayer.dir + 0.3);
             break;
     }
 })
@@ -7418,14 +7434,14 @@ try {
                         j = (() => (clearTimeout(t), n = !0))
                     })), n || (tt || (_e = !0), rt = !0, j = (() => {})))
                 });
-                window.addEventListener("mousedown", nt);
+                //window.addEventListener("mousedown", nt);
                 window.insta = function(){nt();it();dt()};
                 const it = ({
                     button: e
                 }) => {
                     2 === e && _ && 2 === N.length && ($e = !1, Pe && (ee = !1, Pe = !1, te = !1, _e = !1, tt && (oe.off("update", tt), tt = null, qe("33", null), Rt = null), Vt = !1, j(), j = (() => {}), N.indexOf(X) !== (Kt ? 1 : 0) && (X = N[Kt ? 1 : 0], qe("5", N[Kt ? 1 : 0], !0)), null === z && 0 === oe.reloads.get(J)[w[X].type] && (re || $ || null !== i) && Je(w[X]), qe("2", xt), re || qe("c", null !== i ? 1 : 0), $ && qe("7", 1)))
                 };
-                window.addEventListener("mouseup", it);
+                //window.addEventListener("mouseup", it);
                 let ot = 0,
                     at = !1,
                     st = !1,
