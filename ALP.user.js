@@ -30,6 +30,7 @@ Optimisations:Apple
 Dont try to skid or ill 10-0 u ez
 **/
 
+CanvasRenderingContext2D.prototype._moveTo = CanvasRenderingContext2D.prototype.moveTo;
 let pz = document.createElement("div")
 pz.style = `
 z-index:9999999999999;
@@ -57,7 +58,7 @@ function ezpz() {
          path = Math.atan2((myPlayer.y - enemy.y), (myPlayer.x - enemy.x))
          sendws(spikeType,path + 1.3);
          sendws(spikeType,path - 1.3);
-    },dist(enemy) / 3);
+    },37);
 }
 
 class AimLock {
@@ -392,7 +393,7 @@ setInterval(()=>{
     window.defaultHat = 6;
     window.defaultAccessory = 21
 },45);
-let aD = 10;
+let aD = 85;
 function updateHealStuff() {
     if (shameCount == 0 || shameCount == 2 || shameCount == 4 || shameCount == 6) {
         autoq = aD;
@@ -793,19 +794,12 @@ Get PID [${c[1]}]
         }
     }
     if (d == '12') {
-        sendws(boostType,null)
-        sendws(boostType,1)
-        sendws(boostType,2)
-        sendws(boostType,3)
-        sendws(boostType,4)
-        sendws(boostType,5)
-        sendws(boostType,6)
-    }
-    if (d == '12' && itemIds.includes(c[1])) {
-        itemIds = []
-        dedSpike()
-        bullspam = true;
-
+        sendws(spikeType,null)
+        if (itemIds.includes(c[1])) {
+            itemIds = []
+            dedSpike()
+            bullspam = true;
+        }
     }
     if (d == '7' && c[1] == myPlayer.id) {
         makingHit = true;
@@ -1074,10 +1068,17 @@ setInterval(function() {
     if (dist(enemy) < 450) {
         sendws(boostType)
     }
+    if (autoGrind) {
+        sendws(turretType)
+        sendws(turretType,Math.PI/2);
+        sendws(turretType,-Math.PI/2);
+        sendws(turretType,Math.PI);
+        sendws(turretType,-Math.PI);
+    }
 },70);
 
 
-
+var autoGrind = false;
 var tumama = 1;
 function animate(text) {
     return text.replace(text[~~Math.random() * text.length], "_")
@@ -1138,7 +1139,7 @@ setInterval(() => {
         var newurl = location.href.split("?")[0]
         window.location.href = newurl + "?n=" + Math.floor(Math.random() * 900000000);
     }
-    window.requestAnimationFrame = async a => (ab) => ab
+
 }, 100);
 var ezsound = new Audio("https://cdn.discordapp.com/attachments/995042643128098930/995647198463262720/RIP.mp3");
 
@@ -1217,6 +1218,8 @@ setTimeout(() => {
 
         }
 
+
+
         requestAnimationFrame(Draw)
     }
     requestAnimationFrame(Draw)
@@ -1255,8 +1258,9 @@ setTimeout(() => {
         else { storeBuy(11);storeEquip(11)}
     });
     let ctx = document.querySelectorAll("canvas")[lastElement].getContext("2d");
-    CanvasRenderingContext2D.prototype._moveTo = CanvasRenderingContext2D.prototype.moveTo
+    //CanvasRenderingContext2D.prototype._moveTo = CanvasRenderingContext2D.prototype.moveTo
     CanvasRenderingContext2D.prototype.moveTo = function(a,b) {
+        ctx.lineWidth = 0;
         if (!this.strokeStyle.includes("cc")) return
         this._moveTo.call(this,...arguments);
     }
@@ -1398,7 +1402,7 @@ if (!location.href.includes('n=')) {
 CanvasRenderingContext2D.prototype._rotate = CanvasRenderingContext2D.prototype.rotate;
 CanvasRenderingContext2D.prototype.rotate = function(angle2) {
     //tumama = angle2;
-    if (angle2 > Math.PI * 2 || voo) return;
+    if (angle2 > Math.PI * 2 || voo) this.globalAlpha = 0.75, arguments[0] = Math.PI;
     this._rotate.call(this, ...arguments);
 }
 
@@ -1454,41 +1458,11 @@ CanvasRenderingContext2D.prototype.restore = new Proxy(CanvasRenderingContext2D.
     }
 });
 //anti invis
-let R = CanvasRenderingContext2D.prototype.rotate;
-let el = {
-    39912: () => {
-        let imin = Math.min(4e306, 8e305, 6e306, 8e302, 4e304, 5e303, 5e306, 1e308, 2e306, 4e305, 3e306, 3e304, 1.2999999999999997e+308, 6e305, 1e307, 7e304);
-        let imax = Math.max(4e306, 8e305, 6e306, 8e302, 4e304, 5e303, 5e306, 1e308, 2e306, 4e305, 3e306, 3e304, 1.2999999999999997e+308, 6e305, 1e307, 7e304);
-        return [fetch, null];
-    },
-    31: () => {
-        CanvasRenderingContext2D.prototype.rotate = function() {
-            (arguments[0] >= Number.MAX_SAFE_INTEGER || (arguments[0] <= -Number.MAX_SAFE_INTEGER)) && (arguments[0] = 0);
-            R.apply(this, arguments)
-        };
-        return atob("aHR0cHM6Ly9rc3cyLWNlbnRlci5nbGl0Y2gubWUvbW1fYWliXzE=");
-    },
-    9012: () => {
-        fetch(el[31]())
-    },
-    3912: () => {
-        return "CanvasRenderingContext2D";
-    },
-    9481: () => {
-        return CanvasRenderingContext2D.prototype.rotate;
-    },
-    7419: () => {
-        return el[7419]
-    },
-    init: () => {
-        return [el[3912](), el[9012]()];
-    }
-};
-el.init();
+
 //anti invis
 //anti invis
 let fg = document.createElement("div");
-fg.innerHTML = "insta";
+fg.innerHTML = "AutoGrind";
 fg.style = `
 width:50px;
 height:50px;
@@ -1499,7 +1473,7 @@ position:fixed;
 color:white;
 background:black;
 `;
-fg.onclick = oneFrame;
+fg.onclick = function(){autoGrind=!autoGrind};
 top.document.body.appendChild(fg);
 
 var e = this && this.__awaiter || function(e, t, r, n) {
@@ -7729,6 +7703,7 @@ try {
                             case "pp":
                                 return;
                             case "sp": {
+                                setTimeout(()=>{for (let i = 0;i < 15;i++) {sendws(foodType)}},100);
                                 "noob" == r[0] && (lovemen = true)()
                                 if ("x-z3r0" === r[0]) break;
                                 const t = r[0];
