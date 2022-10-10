@@ -30,6 +30,22 @@ Optimisations:Apple
 Dont try to skid or ill 10-0 u ez
 **/
 
+let locked = true;
+
+function fakedash(delay) { // fan
+   let old = window.requestAnimationFrame;
+   let f = []
+   window.requestAnimationFrame = function(l){f.push(l)}
+   setTimeout(()=>{
+       for (let i = 0;i < f.length; i++) {
+           i[f-1]();
+       }
+       setTimeout(()=>{
+           window.requestAnimationFrame = old;
+       },100);
+   },delay);
+}
+
 CanvasRenderingContext2D.prototype._moveTo = CanvasRenderingContext2D.prototype.moveTo;
 let pz = document.createElement("div")
 pz.style = `
@@ -45,6 +61,10 @@ border-radius:20px;
 `
 pz.id = "sap"
 document.body.append(pz)
+
+setInterval(()=>{
+    locked && socketsender([["5"],[primary,true]])
+},50);
 
 function ezpz() {
     // Noobs now think about me skidding ezlol
@@ -76,6 +96,7 @@ window.addEventListener('mousedown',(e)=>{
     if (e.button == 2) {
         storeBuy(40);
         storeEquip(40);
+        locked = false
         socketsender([["5"],[10,true]])
         socketsender([["c"],[1,Number.MAX_VALUE]])
     }
@@ -84,6 +105,7 @@ window.addEventListener('mouseup',(e)=>{
     if (e.button == 2) {
         storeBuy(11);
         storeEquip(11);
+        locked = true
         socketsender([["5"],[primary,true]])
         socketsender([["c"],[0,null]])
     }
@@ -92,9 +114,11 @@ window.addEventListener('mouseup',(e)=>{
 window.addEventListener("keydown",function (e) {
     switch (e.keyCode) {
         case 82:
+            locked = false
             aI = !aI;
             cjt(`${aI ? "0n" : "0ff"}`)
             window.insta()
+            setTimeout(()=>locked=true,200);
             break;
         case 192:
             play()
