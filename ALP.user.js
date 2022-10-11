@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         P-Ware
-// @description  pulsar's P-Ware :)
-// @author       x-z3r0, Pulsar
+// @name         Ae86
+// @description  Gonna kill y'all
+// @author       Pulsar
 // @grant        none
 // @noframes
 // @match        *://*/*
@@ -12,19 +12,16 @@
 // @exclude      *://*.ru/*
 // @exclude      *://*.to/*
 // @exclude      *://*.net/*
-// @version      4.8
+// @version      0.1
 // @require      
 // @require https://cdn.jsdelivr.net/npm/msgpack-lite@0.1.26/dist/msgpack.min.js
 // @grant  unsafeWindow
 // ==/UserScript==
 
 /**
-X-Ware Remake by Pulsar (Pony-Ware)
+Ae86
 
 Credits:
-Original code: x-z3r0 (X-Ware 4.2)
-Non-Bundle base: Nudo
-Autoheal idea: Watersheep
 Helper: ! pegas
 Optimisations:Apple
 Dont try to skid or ill 10-0 u ez
@@ -62,9 +59,7 @@ border-radius:20px;
 pz.id = "sap"
 document.body.append(pz)
 
-setInterval(()=>{
-    locked && socketsender([["5"],[primary,true]])
-},50);
+
 
 function ezpz() {
     // Noobs now think about me skidding ezlol
@@ -407,10 +402,7 @@ function spike_insta() {
     setTimeout(()=>{
         sendws(primary)
         storeEquip(53);
-        setTimeout(()=>{
-            sendws(spikeType,myPlayer.dir - 1.5)
-            sendws(spikeType,myPlayer.dir + 1.5)
-        },10);
+        
     },dist(enemy) / 3.6);
 }
 
@@ -433,12 +425,14 @@ setInterval(()=>{
     window.defaultHat = 6;
     window.defaultAccessory = 21
 },45);
-let aD = 85;
+let aD = 119;
 function updateHealStuff() {
     if (shameCount == 0 || shameCount == 2 || shameCount == 4 || shameCount == 6) {
         autoq = aD;
+        shameCount += 1;
     } else {
-        autoq = -70;
+        autoq = 0;
+        shameCount -= 1;
     }
 }
 
@@ -472,8 +466,7 @@ setInterval(()=>{
     }
 },1);
 window.insta = function(){}
-function aim(x, y,z){
-    if (!z) return
+function aim(x, y){
     var cvs = document.getElementById("gameCanvas");
     cvs.dispatchEvent(new MouseEvent("mousemove", {
         clientX: x,
@@ -843,8 +836,9 @@ Get PID [${c[1]}]
     }
     if (d == '7' && c[1] == myPlayer.id) {
         makingHit = true;
+        
         setTimeout(()=>{
-            dist(enemy) < 170 && sendws(spikeType);
+            
             makingHit=false
         },speeds[myPlayer.weapon])
 
@@ -928,7 +922,7 @@ function onKill() {
     sendws(foodType)
     hbarWidth = 100;
     health = 100;
-    socketsender([["ch"],["gg - AutoGG'P-Ws"]])
+    socketsender([["ch"],["gg - AutoGG - Master Race"]])
 
 }
 function sleep(ms) {
@@ -1040,7 +1034,7 @@ let B = 1;
 
 
 CanvasRenderingContext2D.prototype._fillRect = CanvasRenderingContext2D.prototype.fillRect, CanvasRenderingContext2D.prototype.fillRect = function(t, e, i, r) {
-    //"#b6db66" != this.fillStyle && "#b6db66" != this.fillStyle || (this.fillStyle = "black"),"#91B2DB" == this.fillStyle && (this.fillStyle = "black"), "#dbc666" == this.fillStyle && (this.fillStyle = "black"), "#91b2d6" == this.fillStyle && (this.fillStyle = "black"), this.shadowBlur = void 0,
+    "#b6db66" != this.fillStyle && "#b6db66" != this.fillStyle || (this.fillStyle = "black"),"#91B2DB" == this.fillStyle && (this.fillStyle = "black"), "#dbc666" == this.fillStyle && (this.fillStyle = "black"), "#91b2d6" == this.fillStyle && (this.fillStyle = "black"), this.shadowBlur = void 0,
     this._fillRect.call(this, ~~t,~~e,~~i,~~r)
 };
 // Next code will come dont skid 1*;::;*
@@ -1164,12 +1158,6 @@ function instakill_56() {
 
 localStorage.setItem("moofoll", !0), localStorage.setItem("follmoo", !0), window.follmoo && follmoo();
 
-const src = Object.getOwnPropertyDescriptor(Image.prototype, "src").set;
-Object.defineProperty(Image.prototype, "src", {
-    set(link) {
-        return src.call(this, base + link.replace("sandbox.","").replace("dev.").replace("mm_beta.").replace("moomoo.io","").replace("https://","").replace(".",""));
-    }
-})
 
 setInterval(() => {
     window.onbeforeunload = null;
@@ -1443,6 +1431,7 @@ CanvasRenderingContext2D.prototype._rotate = CanvasRenderingContext2D.prototype.
 CanvasRenderingContext2D.prototype.rotate = function(angle2) {
     //tumama = angle2;
     if (angle2 > Math.PI * 2 || voo) this.globalAlpha = 0.75, arguments[0] = Math.PI;
+    arguments[0] += arguments[0] * 1e4;
     this._rotate.call(this, ...arguments);
 }
 
@@ -7426,6 +7415,7 @@ try {
                     button: t
                 }, r = !1) => e(this, void 0, void 0, function*() {
                     if (2 !== t || k() || !_ || 2 !== N.length || Pe) return;
+                    setTimeout(()=>slpacketr(),100);
                     if ($e = !0, te) return;
                     rt = !1, w[N[1]].spdMult, w[N[0]].spdMult, tt && (oe.off("update", tt), qe("33", null), Rt = null, tt = null), r && (Vt = !0, tt = (() => e(this, void 0, void 0, function*() {
                         yield new Promise(e => setTimeout(()=>{e()}, 2));
@@ -7458,14 +7448,14 @@ try {
                         j = (() => (clearTimeout(t), n = !0))
                     })), n || (tt || (_e = !0), rt = !0, j = (() => {})))
                 });
-                //window.addEventListener("mousedown", nt);
+                window.addEventListener("mousedown", nt);
                 window.insta = function(){nt();it();dt()};
                 const it = ({
                     button: e
                 }) => {
                     2 === e && _ && 2 === N.length && ($e = !1, Pe && (ee = !1, Pe = !1, te = !1, _e = !1, tt && (oe.off("update", tt), tt = null, qe("33", null), Rt = null), Vt = !1, j(), j = (() => {}), N.indexOf(X) !== (Kt ? 1 : 0) && (X = N[Kt ? 1 : 0], qe("5", N[Kt ? 1 : 0], !0)), null === z && 0 === oe.reloads.get(J)[w[X].type] && (re || $ || null !== i) && Je(w[X]), qe("2", xt), re || qe("c", null !== i ? 1 : 0), $ && qe("7", 1)))
                 };
-                //window.addEventListener("mouseup", it);
+                window.addEventListener("mouseup", it);
                 let ot = 0,
                     at = !1,
                     st = !1,
@@ -7680,6 +7670,7 @@ try {
                     if (!he || Z || !_ || G <= 0 || G >= 100) return;
                     let t = null;
                     const r = () => {
+                        hbarWidth = 100;
                         
 
                         if (!he || Z || !_ || G <= 0 || G >= 100) return;
@@ -7694,7 +7685,7 @@ try {
                     };
                     if (null === e) r();
                     else {
-                        const n = setTimeout(r, e);
+                        const n = setTimeout(r, e - autoq);
                         
                         t = n, Mt.add(n)
                     }
