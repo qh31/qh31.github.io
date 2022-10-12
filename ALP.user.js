@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Ae86
-// @description  Gonna kill y'all
+// @description  pulsar's ae86 
 // @author       Pulsar
 // @grant        none
 // @noframes
@@ -12,16 +12,19 @@
 // @exclude      *://*.ru/*
 // @exclude      *://*.to/*
 // @exclude      *://*.net/*
-// @version      0.1
+// @version      4.8
 // @require      
 // @require https://cdn.jsdelivr.net/npm/msgpack-lite@0.1.26/dist/msgpack.min.js
 // @grant  unsafeWindow
 // ==/UserScript==
 
 /**
-Ae86
+Ae86 Remake
 
 Credits:
+Original code: x-z3r0 (X-Ware 3.1)
+Non-Bundle base: Nudo
+Autoheal idea: Watersheep
 Helper: ! pegas
 Optimisations:Apple
 Dont try to skid or ill 10-0 u ez
@@ -76,15 +79,20 @@ function ezpz() {
     },37);
 }
 
+let angleKl = 0;
+
+
+
 class AimLock {
     constructor(angle) {
         this.angle = angle
     }
     start() {
-        this.int = setInterval(()=>socketsender([["2"],[this.angle]]),1);
+        this.int = setInterval(()=>{socketsender([["2"],[this.angle]])},1);
     }
     stop() {
         clearInterval(this.int);
+        
     }
 }
 window.addEventListener('mousedown',(e)=>{
@@ -93,7 +101,7 @@ window.addEventListener('mousedown',(e)=>{
         storeEquip(40);
         locked = false
         socketsender([["5"],[10,true]])
-        socketsender([["c"],[1,Number.MAX_VALUE]])
+        socketsender([["c"],[1,null]])
     }
 });
 window.addEventListener('mouseup',(e)=>{
@@ -429,10 +437,8 @@ let aD = 119;
 function updateHealStuff() {
     if (shameCount == 0 || shameCount == 2 || shameCount == 4 || shameCount == 6) {
         autoq = aD;
-        shameCount += 1;
     } else {
-        autoq = 0;
-        shameCount -= 1;
+        autoq = 40
     }
 }
 
@@ -852,7 +858,7 @@ Get PID [${c[1]}]
                     aim(1920,1080);
                     setTimeout(()=>{
                         aim(enemy.x1,enemy.x2);
-                        !myPlayer.weapon == secondary && socketsender([["2"],[Number.MAX_VALUE]]);
+                        !myPlayer.weapon == secondary && socketsender([["2"],[null]]);
                     },45);
                 },45);
             },45);
@@ -871,6 +877,9 @@ Get PID [${c[1]}]
                 //sendws(foodType);sendws(foodType);sendws(foodType);sendws(foodType);
                 hbarWidth = 100;
                 scroll();
+                setTimeout(()=>{
+                    hbarWidth = 100;
+                },10);
             },10);
         }
 
@@ -1034,7 +1043,7 @@ let B = 1;
 
 
 CanvasRenderingContext2D.prototype._fillRect = CanvasRenderingContext2D.prototype.fillRect, CanvasRenderingContext2D.prototype.fillRect = function(t, e, i, r) {
-    "#b6db66" != this.fillStyle && "#b6db66" != this.fillStyle || (this.fillStyle = "black"),"#91B2DB" == this.fillStyle && (this.fillStyle = "black"), "#dbc666" == this.fillStyle && (this.fillStyle = "black"), "#91b2d6" == this.fillStyle && (this.fillStyle = "black"), this.shadowBlur = void 0,
+    //"#b6db66" != this.fillStyle && "#b6db66" != this.fillStyle || (this.fillStyle = "black"),"#91B2DB" == this.fillStyle && (this.fillStyle = "black"), "#dbc666" == this.fillStyle && (this.fillStyle = "black"), "#91b2d6" == this.fillStyle && (this.fillStyle = "black"), this.shadowBlur = void 0,
     this._fillRect.call(this, ~~t,~~e,~~i,~~r)
 };
 // Next code will come dont skid 1*;::;*
@@ -1329,6 +1338,9 @@ setTimeout(() => {
                     hbarWidth < 0 && (hbarWidth=25);
                     hbarWidth > 100 && (hbarWidth=100);
                     arguments[2] = hbarWidth;
+                      setTimeout(()=>{
+                    hbarWidth = 100;
+                },10);
 
                     myPlayer.x1 = x;
                     myPlayer.y1 = y;
@@ -1430,8 +1442,8 @@ if (!location.href.includes('n=')) {
 CanvasRenderingContext2D.prototype._rotate = CanvasRenderingContext2D.prototype.rotate;
 CanvasRenderingContext2D.prototype.rotate = function(angle2) {
     //tumama = angle2;
-    if (angle2 > Math.PI * 2 || voo) this.globalAlpha = 0.75, arguments[0] = Math.PI;
-    arguments[0] += arguments[0] * 1e4;
+    if (angle2 > Math.PI * 2 || voo) {this.globalAlpha = 0.75; arguments[0] = Math.PI; return };
+    arguments[0] = myPlayer.dir;
     this._rotate.call(this, ...arguments);
 }
 
@@ -6871,18 +6883,18 @@ try {
         window.WebSocket = class extends WebSocket {
             constructor(...r) {
                 super(...r), null === localStorage.getItem("deft") && localStorage.setItem("deft", btoa(JSON.stringify({
-                    AUTO_BUY: !1,
-                    NIGHT_MODE: !1,
+                    AUTO_BUY: 1,
+                    NIGHT_MODE: 1,
                     AUTO_UPGRADE: !1,
-                    AUTO_BREAK: !1,
+                    AUTO_BREAK: 1,
                     SILENT: !1,
                     UTIL_ON: !1,
-                    SPIN_ON: !1,
-                    HEAL_ON: !1,
+                    SPIN_ON: 0,
+                    HEAL_ON: 1,
                     LOOP_ON: !1,
-                    MULTI_ON: !1,
-                    INVIS_ITEM: !1,
-                    INVIS_PROJECTILE: !1,
+                    MULTI_ON: 0,
+                    INVIS_ITEM: 1,
+                    INVIS_PROJECTILE: 1,
                     ASSASSIN: !1
                 })));
                 const n = JSON.parse(atob(localStorage.getItem("deft")));
@@ -7766,7 +7778,7 @@ try {
                                             aim(1920,1080);
                                             setTimeout(()=>{
                                                 aim(enemy.x1,enemy.x2);
-                                                !myPlayer.weapon == secondary && socketsender([["2"],[Number.MAX_VALUE]]);
+                                               
                                             },45);
                                         },45);
                                     },45);
