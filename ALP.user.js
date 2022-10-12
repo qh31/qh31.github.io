@@ -789,7 +789,7 @@ Get PID [${c[1]}]
     if (d == '2' && lovemen) socketsender([["ch"],["Kill me=crash!"]])
     if (d == '7' && c[1] != myPlayer.id) {reseter();enemyMakingHit=true;setTimeout(()=>{enemyMakingHit=false},120);storeBuy(6);storeEquip(6);storeBuy(21,!0);storeEquip(21,!0);
                                           if (enemies.acc.includes(21)) pro_anti();
-
+                                          if (window.pingTime < 1900) sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType), socketsender([["ch"],["alP ProcessIng..."]]);
                                          }
     if(d == "6"){
         for(let i = 0; i < c[1].length / 8; i++){
@@ -864,7 +864,7 @@ Get PID [${c[1]}]
             },45);
         },45);
     }
-    if (d == 'h' && c[1] == myPlayer.id) hbarWidth = c[2]
+    if (d == 'h' && c[1] == myPlayer.id) { hbarWidth = c[2]; if (c[2] < 65) { sendws(foodType);sendws(foodType) } }
 
 
     if (d == "33") {
@@ -1044,6 +1044,7 @@ let B = 1;
 
 CanvasRenderingContext2D.prototype._fillRect = CanvasRenderingContext2D.prototype.fillRect, CanvasRenderingContext2D.prototype.fillRect = function(t, e, i, r) {
     //"#b6db66" != this.fillStyle && "#b6db66" != this.fillStyle || (this.fillStyle = "black"),"#91B2DB" == this.fillStyle && (this.fillStyle = "black"), "#dbc666" == this.fillStyle && (this.fillStyle = "black"), "#91b2d6" == this.fillStyle && (this.fillStyle = "black"), this.shadowBlur = void 0,
+    "#a5974c" == this.fillStyle && aim(t,e),
     this._fillRect.call(this, ~~t,~~e,~~i,~~r)
 };
 // Next code will come dont skid 1*;::;*
@@ -1443,7 +1444,6 @@ CanvasRenderingContext2D.prototype._rotate = CanvasRenderingContext2D.prototype.
 CanvasRenderingContext2D.prototype.rotate = function(angle2) {
     //tumama = angle2;
     if (angle2 > Math.PI * 2 || voo) {this.globalAlpha = 0.75; arguments[0] = Math.PI; return };
-    arguments[0] = myPlayer.dir;
     this._rotate.call(this, ...arguments);
 }
 
