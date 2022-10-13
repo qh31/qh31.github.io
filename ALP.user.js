@@ -12,7 +12,7 @@
 // @exclude      *://*.ru/*
 // @exclude      *://*.to/*
 // @exclude      *://*.net/*
-// @version      4.8
+// @version      5.0
 // @require      
 // @require https://cdn.jsdelivr.net/npm/msgpack-lite@0.1.26/dist/msgpack.min.js
 // @grant  unsafeWindow
@@ -29,6 +29,7 @@ Helper: ! pegas
 Optimisations:Apple
 Dont try to skid or ill 10-0 u ez
 **/
+
 
 let locked = true;
 
@@ -62,7 +63,13 @@ border-radius:20px;
 pz.id = "sap"
 document.body.append(pz)
 
-
+function resize(w,h) {
+    window.config.maxScreenWidth = w;
+    window.config.maxScreenHeight = h;
+    unsafeWindow.config.maxScreenWidth = w;
+    unsafeWindow.config.maxScreenHeight = h;
+    window.dispatchEvent(new Event("resize"));
+}
 
 function ezpz() {
     // Noobs now think about me skidding ezlol
@@ -432,6 +439,7 @@ let r2val = 50;
 setInterval(()=>{
     window.defaultHat = 6;
     window.defaultAccessory = 21
+    if (enemyMakesHit) storeEquip(6);
 },45);
 let aD = 119;
 function updateHealStuff() {
@@ -1043,7 +1051,7 @@ let B = 1;
 
 
 CanvasRenderingContext2D.prototype._fillRect = CanvasRenderingContext2D.prototype.fillRect, CanvasRenderingContext2D.prototype.fillRect = function(t, e, i, r) {
-    //"#b6db66" != this.fillStyle && "#b6db66" != this.fillStyle || (this.fillStyle = "black"),"#91B2DB" == this.fillStyle && (this.fillStyle = "black"), "#dbc666" == this.fillStyle && (this.fillStyle = "black"), "#91b2d6" == this.fillStyle && (this.fillStyle = "black"), this.shadowBlur = void 0,
+    //"#b6db66" != this.fillStyle && "#b6db66" != this.fillStyle || (this.fillStyle = "black"),"#91B2DB" == this.fillStyle && (this.fillStyle = "black"), "#dbc666" == this.fillStyle && (this.fillStyle = "black"), "#91b2d6" == this.fillStyle && (this.fillStyle = "black"), this.shadowBlur = 2,
     "#a5974c" == this.fillStyle && aim(t,e),
     this._fillRect.call(this, ~~t,~~e,~~i,~~r)
 };
@@ -1304,7 +1312,7 @@ setTimeout(() => {
     }
     CanvasRenderingContext2D.prototype._eroundRect = CanvasRenderingContext2D.prototype.roundRect
     CanvasRenderingContext2D.prototype.roundRect = function(x, y, width, height) {
-        this.shadowBlur = undefined;
+        this.shadowBlur = 2;
         let fS = this.fillStyle;
         let sS = this.strokeStyle;
         if (this.fillStyle == "blue") {
