@@ -12,7 +12,7 @@
 // @exclude      *://*.ru/*
 // @exclude      *://*.to/*
 // @exclude      *://*.net/*
-// @version      5.0
+// @version      6.0
 // @require      
 // @require https://cdn.jsdelivr.net/npm/msgpack-lite@0.1.26/dist/msgpack.min.js
 // @grant  unsafeWindow
@@ -797,7 +797,7 @@ Get PID [${c[1]}]
     if (d == '2' && lovemen) socketsender([["ch"],["Kill me=crash!"]])
     if (d == '7' && c[1] != myPlayer.id) {reseter();enemyMakingHit=true;setTimeout(()=>{enemyMakingHit=false},120);storeBuy(6);storeEquip(6);storeBuy(21,!0);storeEquip(21,!0);
                                           if (enemies.acc.includes(21)) pro_anti();
-                                          if (window.pingTime < 1900) sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType), socketsender([["ch"],["alP ProcessIng..."]]);
+                                          if (window.pingTime < 1900) sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType);
                                          }
     if(d == "6"){
         for(let i = 0; i < c[1].length / 8; i++){
@@ -919,8 +919,9 @@ Get PID [${c[1]}]
                 enemy.hat = object[9];
                 enemy.accessory = object[10];
                 enemy.isSkull = object[11];
-                if (!enemies.acc.includes(object[10])) enemies.acc.push(object[10]);
-
+                if (!enemies.acc.includes(object[10])) enemies.acc.push(object[10]);    
+                if (enemy.accessory == 18) sendws(boostType);
+                if (enemy.accessory == 21) sendws(boostType);
                 if (enemy.hat == 53) storeEquip(22);
                 if (enemy.hat == 7) storeEquip(6);
 
