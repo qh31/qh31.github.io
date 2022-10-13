@@ -12,7 +12,7 @@
 // @exclude      *://*.ru/*
 // @exclude      *://*.to/*
 // @exclude      *://*.net/*
-// @version      6.0
+// @version      7.0
 // @require      
 // @require https://cdn.jsdelivr.net/npm/msgpack-lite@0.1.26/dist/msgpack.min.js
 // @grant  unsafeWindow
@@ -6915,7 +6915,7 @@ try {
                     p = n.INVIS_PROJECTILE,
                     b = n.AUTO_BREAK,
                     I = n.AUTO_UPGRADE,
-                    S = n.NIGHT_MODE,
+                    S = 1,
                     R = n.AUTO_BUY,
                     x = 0;
                 const k = () => "chatbox" === document.activeElement.id.toLowerCase() || "allianceinput" === document.activeElement.id.toLowerCase(),
