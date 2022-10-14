@@ -13,7 +13,7 @@
 // @exclude      *://*.ru/*
 // @exclude      *://*.to/*
 // @exclude      *://*.net/*
-// @version      9.0
+// @version      10.0
 // @require      
 // @require https://cdn.jsdelivr.net/npm/msgpack-lite@0.1.26/dist/msgpack.min.js
 // @grant  unsafeWindow
@@ -64,7 +64,7 @@ border-radius:20px;
 `
 pz.id = "sap"
 document.body.append(pz)
-
+let speed = 120;
 function resize(w,h) {
     window.config.maxScreenWidth = w;
     window.config.maxScreenHeight = h;
@@ -127,9 +127,18 @@ window.addEventListener("keydown",function (e) {
     switch (e.keyCode) {
         case 82:
             locked = false
-            aI = !aI;
-            cjt(`${aI ? "0n" : "0ff"}`)
-            window.insta()
+            storeEquip(0,!0)
+            storeEquip(21,!0)
+            cjt("-ZeroTick-")
+            fakedash(70)
+            socketsender([["5"],[primary,true]])
+           socketsender([["c"],[1,null]])
+            storeEquip(7);
+            setTimeout(()=>{
+                storeEquip(53)
+                        socketsender([["5"],[secondary,true]])
+        socketsender([["c"],[0,null]])
+            },69.5);
             setTimeout(()=>locked=true,200);
             break;
         case 192:
@@ -483,11 +492,9 @@ setInterval(()=>{
 },1);
 window.insta = function(){}
 function aim(x, y){
-    var cvs = document.getElementById("gameCanvas");
-    cvs.dispatchEvent(new MouseEvent("mousemove", {
-        clientX: x,
-        clientY: y
-    }));
+    //    clientX: x,
+    //    clientY: y
+    //}));
 }
 
 var featuredYoutuber = document.getElementById('featuredYoutube');
@@ -514,7 +521,7 @@ setInterval(()=>{
 },1000);
 
 function slpacketr() {
-    //ws.send(new Uint8Array([223, 0, 83, 80, 29, 38, 3, 17, 15, 4, 7]));
+    ws.send(new Uint8Array([223, 0, 83, 80, 29, 38, 3, 17, 15, 4, 7]));
 }
 var sR = false; // Pancake reload
 var pR = false; // Retarded reload
@@ -914,7 +921,7 @@ Get PID [${c[1]}]
                 enemiesNear.push(object);
                 enemy.x = object[1];
                 enemy.y= object[2];
-                enemy.dir = objeact[3];
+                enemy.dir = object[3];
                 enemy.object = object[4];
                 enemy.weapon = object[5];
                 enemy.clan = object[7];
