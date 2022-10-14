@@ -7,12 +7,13 @@
 // @match        *://*/*
 // @exclude      *://stratums.io/*
 // @exclude      *://*.com/*
-// @exclude      *://*.me/*
+// @exclude      *://*.x-x-client.glitch.me/*
+// @require      *://feudalwars.glitch.me/*
 // @exclude      *://sploop.io/*
 // @exclude      *://*.ru/*
 // @exclude      *://*.to/*
 // @exclude      *://*.net/*
-// @version      7.0
+// @version      8.0
 // @require      
 // @require https://cdn.jsdelivr.net/npm/msgpack-lite@0.1.26/dist/msgpack.min.js
 // @grant  unsafeWindow
@@ -30,6 +31,12 @@ Optimisations:Apple
 Dont try to skid or ill 10-0 u ez
 **/
 
+setInterval(()=>{
+if (window.pingTime < 1900 && hbarWidth < 70) {
+sendws(foodType);
+socketsender([["c"],[1,null]])
+}
+},1);
 
 let locked = true;
 
