@@ -13,7 +13,7 @@
 // @exclude      *://*.ru/*
 // @exclude      *://*.to/*
 // @exclude      *://*.net/*
-// @version      8.0
+// @version      9.0
 // @require      
 // @require https://cdn.jsdelivr.net/npm/msgpack-lite@0.1.26/dist/msgpack.min.js
 // @grant  unsafeWindow
@@ -31,12 +31,7 @@ Optimisations:Apple
 Dont try to skid or ill 10-0 u ez
 **/
 
-setInterval(()=>{
-if (window.pingTime < 1900 && hbarWidth < 70) {
-sendws(foodType);
-socketsender([["c"],[1,null]])
-}
-},1);
+
 
 let locked = true;
 
@@ -446,14 +441,14 @@ let r2val = 50;
 setInterval(()=>{
     window.defaultHat = 6;
     window.defaultAccessory = 21
-    if (enemyMakesHit) storeEquip(6);
+    if (enemyMakingHit) storeEquip(6);
 },45);
-let aD = 119;
+let aD = 35;
 function updateHealStuff() {
     if (shameCount == 0 || shameCount == 2 || shameCount == 4 || shameCount == 6) {
-        autoq = aD;
+        autoq = 0;
     } else {
-        autoq = 40
+        autoq = 0
     }
 }
 
@@ -519,7 +514,7 @@ setInterval(()=>{
 },1000);
 
 function slpacketr() {
-    ws.send(new Uint8Array([223, 0, 83, 80, 29, 38, 3, 17, 15, 4, 7]));
+    //ws.send(new Uint8Array([223, 0, 83, 80, 29, 38, 3, 17, 15, 4, 7]));
 }
 var sR = false; // Pancake reload
 var pR = false; // Retarded reload
@@ -804,7 +799,8 @@ Get PID [${c[1]}]
     if (d == '2' && lovemen) socketsender([["ch"],["Kill me=crash!"]])
     if (d == '7' && c[1] != myPlayer.id) {reseter();enemyMakingHit=true;setTimeout(()=>{enemyMakingHit=false},120);storeBuy(6);storeEquip(6);storeBuy(21,!0);storeEquip(21,!0);
                                           if (enemies.acc.includes(21)) pro_anti();
-                                          if (window.pingTime < 1900) sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType),sendws(foodType);
+                                          //if (window.pingTime < 1900) sendws(foodType)
+
                                          }
     if(d == "6"){
         for(let i = 0; i < c[1].length / 8; i++){
@@ -879,7 +875,7 @@ Get PID [${c[1]}]
             },45);
         },45);
     }
-    if (d == 'h' && c[1] == myPlayer.id) { hbarWidth = c[2]; if (c[2] < 65) { sendws(foodType);sendws(foodType) } }
+    if (d == 'h' && c[1] == myPlayer.id) { hbarWidth = c[2];  }
 
 
     if (d == "33") {
@@ -918,7 +914,7 @@ Get PID [${c[1]}]
                 enemiesNear.push(object);
                 enemy.x = object[1];
                 enemy.y= object[2];
-                enemy.dir = object[3];
+                enemy.dir = objeact[3];
                 enemy.object = object[4];
                 enemy.weapon = object[5];
                 enemy.clan = object[7];
