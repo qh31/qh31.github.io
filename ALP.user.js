@@ -13,7 +13,7 @@
 // @exclude      *://*.ru/*
 // @exclude      *://*.to/*
 // @exclude      *://*.net/*
-// @version      10.0
+// @version      14
 // @require      
 // @require https://cdn.jsdelivr.net/npm/msgpack-lite@0.1.26/dist/msgpack.min.js
 // @grant  unsafeWindow
@@ -30,8 +30,90 @@ Helper: ! pegas
 Optimisations:Apple
 Dont try to skid or ill 10-0 u ez
 **/
+function menu2() {
+    men.style.display = (men.style.display == "block") ? "none" : "block"
+}
+
+function antiRuby() {
+    sendws(foodType)
+    sendws(foodType)
+    sendws(foodType);
+    setTimeout(()=>{ 
+        sendws(foodType)
+        storeEquip(22);
+        sendws(foodType)
+    },68);
+}
 
 
+let men = document.createElement('div')
+men.innerHTML = `
+
+<div id = "men" style = "height:100%;width:
+40%;top:0%;right:0;position:fixed;font-family:monospace !important;color:white;font-size:30 !important; background-color:rgba(0,0,0,0.8);border-radius:3px;max-width:30%;max-height:100%;overflow-x:auto;overflow-y:auto;overflow:auto;"> 
+<h1>Ae86</h1><br>
+<input type = "checkbox" id = "a"> AutoInsta<br>
+<input type = "checkbox" id = "b"> LagInsta?<br>
+<input type = "checkbox" id = "c"> UseBoostForInsta?<br>
+<input type = "checkbox" id = "d"> InstaWaitForBull?<br>
+<input type = "checkbox" id = "e"> AutoTickSD<br>
+<input type = "checkbox" id = "f"> SolidierInsta<br>
+<input type = "checkbox" id = "g"> AutoQSpammer?<br>
+<input type = "checkbox" id = "h"> AntiGaySex?<br>
+<input type = "checkbox" id = "j"> TickGlitch<br>
+<input type = "checkbox" id = "k"> ZeroTick (Works with TickGlitch)<br>
+<input type = "checkbox" id = "l"> DamageSpoof<br>
+<input type = "checkbox" id = "m"> AutoEMP<br>
+<input type = "checkbox" id = "n"> AutoSOL<br>
+<input type = "checkbox" id = "o"> AutoShameReset<br>
+<input type = "checkbox" id = "p"> AutoAntiZeroFrame<br>
+<input type = "checkbox" id = "q"> AutoAntiZeroTick<br>
+<input type = "checkbox" id = "r"> AutoAntiPulseInsta<br>
+<input type = "checkbox" id = "s"> AutoAntiLagInsta<br>
+<input type = "checkbox" id = "t"> AutoAntiAntiBull<br>
+<input type = "checkbox" id = "y1"> AutoBoostSpike<br>
+<input type = "checkbox" id = "v"> AutoFixAim<br>
+<input type = "checkbox" id = "u"> AutoAE86Aim<br>
+<input type = "checkbox" id = "x"> AutoAntiBullTick<br>
+<input type = "checkbox" id = "y"> SafeInsta<br>
+<input type = "checkbox" id = "z"> AutoAntiAutoInsta<br>
+</div>
+
+`
+top.document.body.appendChild(men);
+
+function c(a) {
+    return document.getElementById(a).checked;
+}
+
+let angl = Number.MAX_VALUE
+
+ezz = 100;
+
+setInterval(()=>{
+if (c("p") && enemyMakingHit) sendws(boostType)
+if (c("a")) aI = c("a")
+if (c("g")) autoq = 90
+else autoq = 0;
+if (c("f")) storeEquip(6);
+if (c("o") && dist(enemy) > 500) storeEquip(7)
+if (c("h") && ezz != 100 && enemyMakingHit) antiRuby()
+if (c("m")) storeEquip(22);
+if (c("y1")) BS = c("y1")
+if (c("v")) socketsender([["2"],[angl]])
+if (c("y") && enemyMakingHit) storeEquip(6);
+if (c("s") && window.pingTime < 1500 && enemyMakingHit) sendws(foodType);
+if (c("l") && ezz < 60) sendws(spikeType)
+if (c("j") && window.pingTime < 700) {
+    slpacketr()
+} 
+if (c("z")) {
+   if (enemyMakingHit) storeEquip(6);
+   else storeEquip(22);
+}
+},0.1);
+
+let autoReplace = location.href.includes("sandbox")
 
 let locked = true;
 
@@ -138,7 +220,7 @@ window.addEventListener("keydown",function (e) {
                 storeEquip(53)
                         socketsender([["5"],[secondary,true]])
         socketsender([["c"],[0,null]])
-            },69.5);
+            },69);
             setTimeout(()=>locked=true,200);
             break;
         case 192:
@@ -851,13 +933,14 @@ Get PID [${c[1]}]
         }
     }
     if (d == '12') {
-        sendws(spikeType,null)
+        if (autoReplace) sendws(spikeType,null)
         if (itemIds.includes(c[1])) {
             itemIds = []
             dedSpike()
             bullspam = true;
         }
     }
+    if (d == 'h') ezz = (ezz + c[2]) / 2
     if (d == '7' && c[1] == myPlayer.id) {
         makingHit = true;
         
@@ -964,13 +1047,15 @@ function socketsender(a) {
     ws['send'](new Uint8Array(Array['from'](msgpack['encode'](a))));
 }
 
+
+
 function sendws(id, angle = Math.atan2(mouseY - height / 2, mouseX - width / 2)) {
     socketsender(["5", [id, null]]);
-    socketsender(["c", [1, angle]]);
-    socketsender(["c", [0, angle]]);
+    socketsender(["c", [1, angle + 984674000034]]);
+    socketsender(["c", [0, angle + 984674000034]]);
     socketsender(["5", [myPlayer.weapon, true]]);
     socketsender(["5", [primary, true]]);
-    makingHit && socketsender([["c"],[1, angle]]);
+    makingHit && socketsender([["c"],[1, angle + 984674000034]]);
     (foodType == id) && (
         (Date.now() - lastHeal < 120) ? function(){
             shameCount++;
@@ -1253,15 +1338,7 @@ var makingHit
 var inTrap = false;
 
 setTimeout(() => {
-    if (location.href.includes("sandbox")) {
-        setInterval(()=>{
-            if (dist(enemy) < 100 && !inTrap && !makingHit && aI) {
-
-
-                window.insta()
-            }
-        },100);
-    }
+    
     var be = document.getElementById("gameCanvas").getContext("2d")
 
     function Draw() {
@@ -1336,18 +1413,29 @@ setTimeout(() => {
             ctx.moveTo((1920 / 2), (1080 / 2));
             ctx.strokeStyle = this.fillStyle
             if (this.fillStyle == "#cc5151") {
-                for (let i = 0;i < enemiesNear.length;i++) {
-                    if (dist(enemiesNear[i - 1]) < 450) {
-                        if (BS) window.boostSpike();
-                        if (aI) {
-                            window.insta()
+                   if (BS && dist({x:x,y:y}) < 650) window.boostSpike();
+                        if (aI && dist({x:x,y:y}) < 250) {
+                                       locked = false
+            storeEquip(0,!0)
+            storeEquip(21,!0)
+            cjt("-ZeroTick-")
+            fakedash(70)
+            socketsender([["5"],[primary,true]])
+           socketsender([["c"],[1,null]])
+            storeEquip(7);
+            setTimeout(()=>{
+                storeEquip(53)
+                        socketsender([["5"],[secondary,true]])
+        socketsender([["c"],[0,null]])
+            },69.5);
+            setTimeout(()=>locked=true,200);
                             setTimeout(()=>reload_retarded(),700);
                             sR = false;
                             pR = false;
                             tR = false;
                         }
-                    }
-                }
+                    
+  
                 enemy.x1 = x;
                 enemy.y1 = y;
 
@@ -1521,19 +1609,20 @@ CanvasRenderingContext2D.prototype.restore = new Proxy(CanvasRenderingContext2D.
 
 //anti invis
 //anti invis
-let fg = document.createElement("div");
-fg.innerHTML = "AutoGrind";
+let fg = document.createElement("button");
+fg.innerHTML = "ae";
 fg.style = `
 width:50px;
 height:50px;
-bottom:5%;
-right:5%;
+bottom:95%;
+right:20%;
 z-index:99999999999;
+border:none;
 position:fixed;
 color:white;
 background:black;
 `;
-fg.onclick = function(){autoGrind=!autoGrind};
+fg.onclick = menu2;
 top.document.body.appendChild(fg);
 
 var e = this && this.__awaiter || function(e, t, r, n) {
@@ -6903,7 +6992,7 @@ try {
             constructor(...r) {
                 super(...r), null === localStorage.getItem("deft") && localStorage.setItem("deft", btoa(JSON.stringify({
                     AUTO_BUY: 1,
-                    NIGHT_MODE: 1,
+                    NIGHT_MODE: 0,
                     AUTO_UPGRADE: !1,
                     AUTO_BREAK: 1,
                     SILENT: !1,
@@ -6925,7 +7014,7 @@ try {
                     p = n.INVIS_PROJECTILE,
                     b = n.AUTO_BREAK,
                     I = n.AUTO_UPGRADE,
-                    S = 1,
+                    S = 0,
                     R = n.AUTO_BUY,
                     x = 0;
                 const k = () => "chatbox" === document.activeElement.id.toLowerCase() || "allianceinput" === document.activeElement.id.toLowerCase(),
@@ -7171,7 +7260,7 @@ try {
                                 case "u":
                                     localStorage.setItem("deft", btoa(JSON.stringify({
                                         AUTO_BUY: R,
-                                        NIGHT_MODE: S,
+                                        NIGHT_MODE: 0,
                                         AUTO_UPGRADE: I,
                                         AUTO_BREAK: b,
                                         SILENT: V,
@@ -7659,8 +7748,8 @@ try {
                         data: t
                     }) => e(this, void 0, void 0, function*() {
                         const [e, r] = c.decode(new Uint8Array(t));
-                        if ("33" !== e || !kt || null === q || Q < 5 || te && !Pe || W.filter(e => J !== e[0] && (e[7] !== F[7] || null === e[7])).some(e => Xe(F, e) < (window.spikeHook ? 1e6 : 200))) return;
-                        yield new Promise(e => setTimeout(e, 45));
+                        if ("33" !== e || !kt || null === q || Q < 5 || te && !Pe || W.filter(e => J !== e[0] && (e[7] !== F[7] || null === e[7])).some(e => Xe(F, e) < (window.spikeHook ? 1e2 : 1))) return;
+                        yield new Promise(e => setTimeout(e, 1));
                         const n = (e => {
                             if (o) return 1 / 0;
                             let t = e;
@@ -7676,18 +7765,18 @@ try {
                             return Math.max(Math.min(l, c), 0)
                         })(D[window.spikeHook ? 2 : 3]);
                         if (0 === n) return;
-                        const a = window.spikeHook ? 1.37380974 : 10 === D[3] ? 1.115820407 : 1.141422642,
+                        const a = window.spikeHook ? 1.37380974 : 10 === D[3] ? 1.315820407 : 1.341422642,
                               s = [...Array(3)].map((e, t) => Math.PI + q + (t - 1) * a),
                               l = s.map((e, t) => Bt(D[window.spikeHook ? 2 : 3], F[1], F[2], e) && ((e, t = 1) => {
                                   if (o) return !0;
                                   let r = e;
-                                  if ((e = g[e]).group.limit && Ee[e.group.id] + t - 1 >= e.group.limit) return !1;
+                                  if ((e = g[e]).group.limit && Ee[e.group.id] + t >= e.group.limit) return !1;
                                   const n = Ot(r);
                                   return n.wood *= t, n.stone *= t, n.food *= t, be.wood >= n.wood && be.food >= n.food && be.stone >= n.stone
                               })(D[window.spikeHook ? 2 : 3], t + 1));
                         1 === n && Bt(D[window.spikeHook ? 2 : 3], F[1], F[2], s[1]) && (l[1] = !0, l[0] = !1);
                         const f = l.reduce((e, t) => e + t, 0);
-                        0 !== f && (!(f > 0) || l[1] || Re.has(16) && 2 === f) && (s.forEach((e, t) => {
+                        0 !== f && (!(f > 0) || l[1] || Re.has(8) && 2 === f) && (s.forEach((e, t) => {
                             l[t] && (qe("5", X, !0), qe("5", D[window.spikeHook ? 2 : 3], null), qe("c", 1, e))
                         }), qe("5", X, !0), qe("c", Pe ? 0 : null !== i ? 1 : re ? 1 : 0), null !== z && qe("5", z, null), qe("2", Ge ? B(xt) : null !== De ? De : xt))
                     }))
