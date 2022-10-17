@@ -80,6 +80,7 @@ men.innerHTML = `
 <input type = "checkbox" id = "z"> AutoAntiAutoInsta<br>
 <input type = "checkbox" id = "a2"> GameTickTest<br>
 <input type = "checkbox" id = "b2">AutoSpike<br>
+<input type = "checkbox" id = "c2">eXtrem3 B3T4 HeaL<br>
 
 </div>
 
@@ -95,6 +96,7 @@ let angl = Number.MAX_VALUE
 ezz = 100;
 
 setInterval(()=>{
+MVH = c("c2")
 if (c("b2") && makingHit) sendws(spikeType)
 if (c("p") && enemyMakingHit) sendws(boostType)
 if (c("a")) aI = c("a")
