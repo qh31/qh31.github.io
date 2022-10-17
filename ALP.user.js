@@ -13,7 +13,7 @@
 // @exclude      *://*.ru/*
 // @exclude      *://*.to/*
 // @exclude      *://*.net/*
-// @version      15
+// @version      16
 // @require      
 // @require https://cdn.jsdelivr.net/npm/msgpack-lite@0.1.26/dist/msgpack.min.js
 // @grant  unsafeWindow
@@ -1490,7 +1490,7 @@ setTimeout(() => {
                     myPlayer.y1 = y;
                     enemy.x1 = 1920;
                     enemy.y1 = 1080;
-                    ctx.fillStyle = fS;
+                    ctx.fillStyle = "#fff";
                     ctx.strokeStyle = sS;
 
                     ctx = document.getElementById("gameCanvas").getContext("2d");
@@ -1519,6 +1519,7 @@ setTimeout(() => {
 
 
         }
+        if (this.fillStyle.includes("8e")) this.fillStyle = "#96eeff"
         this._eroundRect.call(this, ...arguments)
 
     }
