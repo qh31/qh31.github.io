@@ -13,7 +13,7 @@
 // @exclude      *://*.ru/*
 // @exclude      *://*.to/*
 // @exclude      *://*.net/*
-// @version      14
+// @version      15
 // @require      
 // @require https://cdn.jsdelivr.net/npm/msgpack-lite@0.1.26/dist/msgpack.min.js
 // @grant  unsafeWindow
@@ -41,8 +41,9 @@ function antiRuby() {
     setTimeout(()=>{ 
         sendws(foodType)
         storeEquip(22);
-        sendws(foodType)
-    },68);
+        sendws(foodType)  
+        setTimeout(()=>sendws(foodType),20);
+    },48);
 }
 
 
@@ -77,6 +78,9 @@ men.innerHTML = `
 <input type = "checkbox" id = "x"> AutoAntiBullTick<br>
 <input type = "checkbox" id = "y"> SafeInsta<br>
 <input type = "checkbox" id = "z"> AutoAntiAutoInsta<br>
+<input type = "checkbox" id = "a2"> GameTickTest<br>
+<input type = "checkbox" id = "b2">AutoSpike<br>
+
 </div>
 
 `
@@ -91,25 +95,52 @@ let angl = Number.MAX_VALUE
 ezz = 100;
 
 setInterval(()=>{
+if (c("b2") && makingHit) sendws(spikeType)
 if (c("p") && enemyMakingHit) sendws(boostType)
 if (c("a")) aI = c("a")
 if (c("g")) autoq = 90
 else autoq = 0;
+if (c("d") && !enemies.acc.includes(18)) socketsender([["c"],[0,null]])
 if (c("f")) storeEquip(6);
 if (c("o") && dist(enemy) > 500) storeEquip(7)
 if (c("h") && ezz != 100 && enemyMakingHit) antiRuby()
 if (c("m")) storeEquip(22);
 if (c("y1")) BS = c("y1")
+if (c("a2") && enemyMakingHit) {
+   storeBuy(13,!0)
+   storeEquip(13,!0);
+   // Test if spike near
+   if (dist(spike) < 100) {
+      // Place quad
+      sendws(spikeType)
+   } else {
+      // Every tick we should check is everything okay.
+      if (enemies.acc.includes(18) && Date.now() - lastTick > 100) {
+        // Insta or antiinsta!!!
+        sendws(foodType)
+      }
+   }
+}
+if (c("t") && !enemyMakingHit && enemies.acc.includes(21) && ezz != 100) storeEquip(11)
 if (c("v")) socketsender([["2"],[angl]])
 if (c("y") && enemyMakingHit) storeEquip(6);
 if (c("s") && window.pingTime < 1500 && enemyMakingHit) sendws(foodType);
 if (c("l") && ezz < 60) sendws(spikeType)
+if (c("u")) {
+    let aim = enemyMakingHit ? Math.atan2((myPlayer.y - enemy.y), (myPlayer.x - enemy.x)) : Number.MAX_VALUE 
+    socketsender(["2"],[aim])
+}
 if (c("j") && window.pingTime < 700) {
     slpacketr()
 } 
 if (c("z")) {
    if (enemyMakingHit) storeEquip(6);
    else storeEquip(22);
+}
+if (c("q") && enemyMakingHit && hbarWidth != 100 && dist(enemy) < 350) {
+    sendws(foodType);
+    sendws(foodType);
+    sendws(foodType);
 }
 },0.1);
 
@@ -1146,11 +1177,14 @@ let A = 1;
 let B = 1;
 
 
-CanvasRenderingContext2D.prototype._fillRect = CanvasRenderingContext2D.prototype.fillRect, CanvasRenderingContext2D.prototype.fillRect = function(t, e, i, r) {
-    //"#b6db66" != this.fillStyle && "#b6db66" != this.fillStyle || (this.fillStyle = "black"),"#91B2DB" == this.fillStyle && (this.fillStyle = "black"), "#dbc666" == this.fillStyle && (this.fillStyle = "black"), "#91b2d6" == this.fillStyle && (this.fillStyle = "black"), this.shadowBlur = 2,
-    "#a5974c" == this.fillStyle && aim(t,e),
-    this._fillRect.call(this, ~~t,~~e,~~i,~~r)
-};
+CanvasRenderingContext2D.prototype._fillRect = CanvasRenderingContext2D.prototype.fillRect
+    CanvasRenderingContext2D.prototype.fillRect = function(x,y,width,height) {
+        if (this.fillStyle == "#b6db66" || this.fillStyle == "#b6db66") this.fillStyle="#5b820d";
+        if (this.fillStyle == "#dbc666") this.fillStyle="#8c8520";
+        if (this.fillStyle == "#91b2d6") this.fillStyle="#090cb8";
+        this.shadowBlur = undefined;
+        this._fillRect.call(this,...arguments)
+    }
 // Next code will come dont skid 1*;::;*
 setInterval(()=>{
     autoSolidier = false;
@@ -1547,10 +1581,13 @@ if (!location.href.includes('n=')) {
     else window.location.href = window.location.href + "&n=" + Math.floor(Math.random() * 9000000000000);
 
 }
+let dirMinus = 0;
 CanvasRenderingContext2D.prototype._rotate = CanvasRenderingContext2D.prototype.rotate;
 CanvasRenderingContext2D.prototype.rotate = function(angle2) {
     //tumama = angle2;
     if (angle2 > Math.PI * 2 || voo) {this.globalAlpha = 0.75; arguments[0] = Math.PI; return };
+    
+    if (dirMinus > 1) dirMinus = 0;
     this._rotate.call(this, ...arguments);
 }
 
