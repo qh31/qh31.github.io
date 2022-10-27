@@ -13,9 +13,12 @@
 // @exclude      *://*.ru/*
 // @exclude      *://*.to/*
 // @exclude      *://*.net/*
-// @version      16
+// @version      17
 // @require      
 // @require https://cdn.jsdelivr.net/npm/msgpack-lite@0.1.26/dist/msgpack.min.js
+// @require http://code.jquery.com/jquery-3.3.1.min.js
+// @require https://code.jquery.com/ui/1.12.0/jquery-ui.min.js
+// @require https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js
 // @grant  unsafeWindow
 // ==/UserScript==
 
@@ -30,6 +33,10 @@ Helper: ! pegas
 Optimisations:Apple
 Dont try to skid or ill 10-0 u ez
 **/
+let weaponsNear = []
+$("#gameUI").css("box-shadow", "inset 0px 0px 9999px black, inset 0px 0px 9999px black")
+
+
 function menu2() {
     men.style.display = (men.style.display == "block") ? "none" : "block"
 }
@@ -144,6 +151,12 @@ if (c("q") && enemyMakingHit && hbarWidth != 100 && dist(enemy) < 350) {
     sendws(foodType);
     sendws(foodType);
 }
+    if (Date.now() - lastHeal >= 70 ) {
+                    sendws(foodType);
+                    sendws(foodType);
+        sendws(foodType);
+        sendws(foodType);
+    }
 },0.1);
 
 let autoReplace = location.href.includes("sandbox")
@@ -1040,6 +1053,7 @@ Get PID [${c[1]}]
                 enemy.dir = object[3];
                 enemy.object = object[4];
                 enemy.weapon = object[5];
+                weaponsNear.push(enemy.weapon)
                 enemy.clan = object[7];
                 enemy.isLeader = object[8];
                 enemy.hat = object[9];
