@@ -151,7 +151,7 @@ if (c("q") && enemyMakingHit && hbarWidth != 100 && dist(enemy) < 350) {
     sendws(foodType);
     sendws(foodType);
 }
-    if (Date.now() - lastHeal >= 70 ) {
+    if (Date.now() - lastHeal >= 70 && hbarWidth != 100) {
                     sendws(foodType);
                     sendws(foodType);
         sendws(foodType);
