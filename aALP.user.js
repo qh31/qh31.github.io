@@ -157,6 +157,13 @@ if (c("q") && enemyMakingHit && hbarWidth != 100 && dist(enemy) < 350) {
         sendws(foodType);
         sendws(foodType);
     }
+    for (let a = 0; a > dedDists.length; a++) {
+        if (myPlayer.dir - dedDists[a-1] < Math.PI / 2) {
+            sendws(spikeType, dedDists[a-1] );
+            sendws(spikeType, dedDists[a-1] - Math.PI / 2);
+            sendws(spikeType, dedDists[a-1]  + Math.PI / 2);
+        }
+    }
 },0.1);
 
 let autoReplace = location.href.includes("sandbox")
@@ -207,10 +214,10 @@ function ezpz() {
     sendws(spikeType,myPlayer.dir - Math.PI - 1.3);
     sendws(spikeType,myPlayer.dir + Math.PI + 1.3);
     // ezzz everyone XD
-    let path = Math.atan2((myPlayer.y - enemy.y), (myPlayer.x - enemy.x))
-    socketsender([["33"],[path]])
+    let path = Math.atan2((myPlayer.x - enemy.x), (myPlayer.y - enemy.y))
+    socketsender([["33"],[path - (Math.atan2(enemy.x - spike.x, enemy.y - spike.y) / 2)]])
     setTimeout(()=>{
-         path = Math.atan2((myPlayer.y - enemy.y), (myPlayer.x - enemy.x))
+         path = Math.atan2((myPlayer.x - enemy.x), (myPlayer.y - enemy.y))
          sendws(spikeType,path + 1.3);
          sendws(spikeType,path - 1.3);
     },37);
@@ -232,6 +239,7 @@ class AimLock {
         
     }
 }
+
 window.addEventListener('mousedown',(e)=>{
     if (e.button == 2) {
         storeBuy(40);
@@ -528,6 +536,7 @@ CanvasRenderingContext2D.prototype.restore = new Proxy(CanvasRenderingContext2D.
 
 let dedTraps = []
 let itemIds = []
+let dedDists = []
 
 
 function dedSpike() {
@@ -959,7 +968,7 @@ Get PID [${c[1]}]
                 ObjectDataa.x = ObjectData[1]
                 ObjectDataa.y = ObjectData[2]
                 if (dist(ObjectDataa) < 92) {
-                    let aimer = new AimLock(ObjectData[3])
+                    let aimer = new AimLock(ObjectData[3] - Math.PI)
                     aimer.start()
                     setTimeout(()=>{
                         aimer.stop()
@@ -974,7 +983,7 @@ Get PID [${c[1]}]
             }
             if (ObjectData[6] == 15 && ObjectData[7] == myPlayer.id) {
                 itemIds.push(ObjectData[0])
-                if (dist({x:ObjectData[1],y:ObjectData[2]}) < 120) ezpz();
+                if (dist({x:ObjectData[1],y:ObjectData[2]}) < 120) {ezpz();dedDists.push(Math.atan2(enemy.x - ObjectData[1],enemy.y - ObjectData[2]) - (Math.PI / 2))}
             }
         }
     }
@@ -982,6 +991,7 @@ Get PID [${c[1]}]
         if (autoReplace) sendws(spikeType,null)
         if (itemIds.includes(c[1])) {
             itemIds = []
+            dedDists = dedDists.split(0)[1]
             dedSpike()
             bullspam = true;
         }
@@ -1598,13 +1608,14 @@ if (!location.href.includes('n=')) {
     else window.location.href = window.location.href + "&n=" + Math.floor(Math.random() * 9000000000000);
 
 }
+function inRange(a,b) {
+    return a - b < Math.PI / 2;
+}
 let dirMinus = 0;
 CanvasRenderingContext2D.prototype._rotate = CanvasRenderingContext2D.prototype.rotate;
 CanvasRenderingContext2D.prototype.rotate = function(angle2) {
     //tumama = angle2;
-    if (angle2 > Math.PI * 2 || voo) {this.globalAlpha = 0.75; arguments[0] = Math.PI; return };
-    
-    if (dirMinus > 1) dirMinus = 0;
+    if (angle2 > Math.PI * 2 || voo) {arguments[0] = Math.PI; return };
     this._rotate.call(this, ...arguments);
 }
 
@@ -1634,6 +1645,7 @@ function createHook(target, prop, setter, getter) {
     })
 }
 
+let dirPlus = 0;
 
 createHook(Object.prototype, "isItem", function(that, symbol, value) {
     that[symbol] = value;
@@ -1641,6 +1653,11 @@ createHook(Object.prototype, "isItem", function(that, symbol, value) {
     if (value === true) {
         item = that;
     }
+});
+createHook(Object.prototype, "dirPlus", function(that, symbol, value) {
+    that[symbol] = value;
+}, function(that, value) {
+        dirPlus = that;
 });
 createHook(Object.prototype, "exports", function(that, symbol, value) {
     that[symbol] = value;
