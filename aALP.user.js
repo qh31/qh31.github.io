@@ -16,6 +16,7 @@
 // @run-at       document-end
 // ==/UserScript==
 //basic tank gear -_-
+
 function get(x) {
     return document.getElementById(x).checked
 }
@@ -40,6 +41,7 @@ menu.innerHTML = `
     pathfinder y: <input type = "name" id = "y"> <br>
     <input type = "checkbox" id = "bounce"> bounce guy<br>
     <input type = "checkbox" id = "pusher"> autopush<br>
+    <input type = "checkbox" id = "tribeInsta"> Tribe Insta<br>
     `;
 menu.style = `
     width:130px;
@@ -59,6 +61,7 @@ menu.style = `
     border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
     border-image-slice: 1;
     overflow:auto;
+    scrollWidth:0;
     `;
 document.body.appendChild(menu)
 
@@ -2687,7 +2690,7 @@ var visual = true;
                 (e.exports.riverPadding = 114),
                 (e.exports.waterCurrent = 0.0011),
                 (e.exports.waveSpeed = 1e-4),
-                (e.exports.waveMax = 1.3),
+                (e.exports.waveMax = 1.7),
                 (e.exports.treeScales = [150, 160, 165, 175]),
                 (e.exports.bushScales = [80, 85, 95]),
                 (e.exports.rockScales = [80, 85, 90]),
@@ -3918,12 +3921,14 @@ var visual = true;
             return "block" != Ye.style.display && "block" != nn.style.display;
         }
         function vn() {
-            storeEquip(7);
-            storeEquip(18, !0);
-
-            setTimeout(()=>{
-                storeEquip(6)
-            },111);
+            if (R.reloads[0] > 0) {
+                storeEquip(7);
+                storeEquip(18, !0);
+                if (get("bounce")) {setTimeout(()=>{storeBuy(26);storeEquip(26)}, 55)}
+                setTimeout(()=>{
+                    storeEquip(6)
+                },111);
+            }
             R && R.alive && r.send("c", O, R.buildIndex >= 0 ? pn() : null);
         }
         window.addEventListener(
@@ -4055,7 +4060,6 @@ var visual = true;
         }
         function Cn(e) {
             nt.disableBySid(e);
-            spikeSync()
 
         }
         function On() {
@@ -4779,6 +4783,7 @@ var visual = true;
         }
         function fi(e, t, n, i, r, s, a, o) {
             lt && (J.addProjectile(e, t, n, i, r, s, null, null, a).sid = o);
+            canStop = true
         }
         function di(e, t) {
             for (var n = 0; n < G.length; ++n) G[n].sid == e && (G[n].range = t);
@@ -4917,29 +4922,39 @@ var visual = true;
                 e.keyCode == 192 &&
                 document.activeElement.id.toLowerCase() !== "chatbox"
             )
-                play1();
+                autoGRIND=!autoGRIND
         });
+        let autoGRIND = false
 
         window.addEventListener("keydown",function(e){
             if (e.keyCode == 82 && document.activeElement.id.toLowerCase() !== "chatbox") {
+                if (get("tribeInsta")) Ht()
                 storeEquip(18, !0);
                 storeEquip(7);
                 Sn(R.weapons[0], true);
                 r.send("c", 1, null);
                 let y = setInterval(() => {
                     if (canInsta) {
+                        canInsta = false
                         Sn(R.weapons[1], true);
                         storeEquip(53);
-                        r.send("c", 0, null);
-                        r.send("5", R.weapons[0], false);
-                        setTimeout(()=>{storeEquip(6)
-                                        holdV(5)
-                                       },60);
                         clearInterval(y);
-                    }
+                        let ya = setInterval(() => {
+                            if (canStop || R.weapons[1] == 11) {
+                                canStop = false
+                                r.send("c", 0, null);
+                                clearInterval(ya)
+                                holdV(5)
+                                storeEquip(6)
+                                r.send("ch", "die in hole")
+                                r.send("5", R.weapons[0], false);
+                            }
+                        },0.1)
+                        }
                 }, 0.1);
             }
         })
+        let canStop = false
         setInterval(() => {
             storeBuy(26)
             storeBuy(40)
@@ -4957,18 +4972,6 @@ var visual = true;
             }
         }, 60);
         let caanInsta = false
-        function spikeSync() { // why skid nigga
-            storeEquip(7)
-            let dirLock = R.dir 
-            r.send("c", 1, dirLock)
-            if (canInsta) {
-                r.send("5", 10, dirLock)
-                setTimeout(()=>{
-                    storeEquip(6);
-                    placer(R.items[2], dirLock);
-                },50);
-            }
-        }
         window.autopush = leg => {
             this.checkSpike = obj => {
                 r.send("ch", "autopush")
@@ -5061,6 +5064,13 @@ var visual = true;
                 r.send("2", Number.MAX_VALUE);
                 storeBuy(13);storeEquip(13);
                 storeBuy(13,!0);storeEquip(13,!0);
+            }
+
+            if (autoGRIND) {
+                r.send("c", 1, 90**100)
+                r.send("2", 90**100)
+                autoP = true
+                autoP = false
             }
         },5);
         function Ti(e) {
