@@ -17,6 +17,80 @@
 // ==/UserScript==
 //basic tank gear -_-
 
+var songlol = `
+Rozjebane życie jak dupa prostytutki/
+Takie są skutki od dragów I wódki/
+Nie pytaj co u nas nie chciałbyś wiedzieć/
+Jeden grzeje puchę drugi w czubkach musi siedzieć/
+Nałóg dopierdala I za chuja nie odpuszcza/
+Ziomek się powiesił bo dziewczyna mu się puszcza/
+No I chuj/
+Jak psycha siada weź tylko zobacz jak diabeł się skrada/
+Żeby ci dojebać ubezwłasnowolnić/
+Na taki stan rzeczy nie da się uodpornić/
+Próbuje się uwolnić skuty łańcuchami/
+Kontakty z kurwami zabawi z dragami/
+To rozkurwia czachę I niszczy od środka/
+Czekam na karmę która mnie spotka/
+Bo święty nie byłem jestem I nie będę/
+Matka urodziła pierdoloną mendę/
+Co za dużo to nie zdrowo/
+A jak mało to chujowo/
+Głowa siada krwawi serce/
+W organizmie mam morderce/
+Co za dużo to nie zdrowo/
+I ciągłe kłopoty z głową/
+Trudno podnieść się z podłogi gdy się uginają nogi/
+Były marzenia o żonie I rodzinie/
+Marzenia szybko prysły zakochany w heroinie/
+Rozumiesz skurwysynie to nie są żarty/
+Sumienie wciąż gryzie jak wściekłe lamparty/
+Mamy krwawe party/
+Z nosa leci krew/
+Kiedyś małe dawki dzisiaj to za trzech/
+Nie proś mnie o rady radź sobie sam/
+Jestem egoistą I wyjebane mam/
+Bo nie radzę sobie sam/
+A rad nie udzielam/
+Skoro jak widzisz sam ledwo się zbieram/
+Nie poznaję się siebie I to jest okropne/
+Znów ręce potnę w te noce samotne/
+Wyję do księżyca I przypalam złotko/
+Sam kurwa widzisz że tu nie jest słodko/
+A raczej gorzko czy czujesz tą gorycz/
+Łzy nic nie dają ale sobie porycz/
+Co za dużo to nie zdrowo/
+A jak mało to chujowo/
+Głowa siada krwawi serce/
+W organizmie mam morderce/
+Co za dużo to nie zdrowo/
+I ciągłe kłopoty z głową/
+Trudno podnieść się z podłogi gdy się uginają nogi/
+Mówią samobójcy to jebani tchórze/
+Wcale nie to odważni ludzie/
+Myślałem o tym gównie I już wiele razy/
+Ale dobre słowo odpychało te koszmary/
+Co z tego że nie pije nie ćpam I nie dymie/
+Jak moje życie nie jest wcale kurwa szczęśliwe/
+Nie wiem o co chodzi czy o gwiazdkę z nieba/
+Czy stabilizacja bo czułości mi potrzeba/
+Chce kochać być kochany ale tak dojrzale/
+Bo podrywałem tylko dragi I gorzałę/
+Teraz walczę z sobą z moimi demonami/
+I nie będę kłamał się napierdalamy/
+O każdy nowy dzień wygra zło czy dobro/
+Nie chce być bezdomny głodny klatka chłodno/
+Zobaczycie fazy stanie na nogi/
+A niektóre kurwy weźmie se za rogi/
+Co za dużo to nie zdrowo/
+A jak mało to chujowo/
+Głowa siada krwawi serce/
+W organizmie mam morderce/
+Co za dużo to nie zdrowo/
+I ciągłe kłopoty z głową/
+Trudno podnieść się z podłogi gdy się uginają nogi
+`
+songlol = songlol.split(`/`)
 function get(x) {
     return document.getElementById(x).checked
 }
@@ -42,6 +116,9 @@ menu.innerHTML = `
     <input type = "checkbox" id = "bounce"> bounce guy<br>
     <input type = "checkbox" id = "pusher"> autopush<br>
     <input type = "checkbox" id = "tribeInsta"> Tribe Insta<br>
+    <input type = "checkbox" id = "heal">autoheal proe<br>
+    <input type = "checkbox" id = "macro"> Mastre macro<br>
+    <button onclick = "window.song1()"> Song 1 </button>
     `;
 menu.style = `
     width:130px;
@@ -80,12 +157,24 @@ document.addEventListener('keydown', function (CustomKey1) {
 // $("#gameUI").css("box-shadow", "inset 10px 10px 99px black, inset 10px 10px 99px black")
 
 //Key F4
+window.showText = function(){}
 const music = new Audio("https://cdn.discordapp.com/attachments/884746775385215017/927181128056594512/test.mp3");
 var playyy = false;
-addEventListener("keydown", e => {
-    if(e.keyCode == 115) {
+window.song1 = function () {
+        let h = 1
+        let y = setInterval(()=>{
+            doNewSend([["ch"],[songlol[h-1]]])
+            window.showText(songlol[h-1])
+            h++
+            if (h > songlol.length) {h = 0, clearInterval(y)}
+        },3000);
         playyy = !playyy;
         if(playyy) music.play(); else music.pause();
+  
+}
+addEventListener("keydown", e => {
+    if(e.keyCode == 115) {
+        window.song1()
     }
 });
 
@@ -180,6 +269,10 @@ function socketFound(socket) {
     socket.addEventListener('message', function(message) {
         handleMessage(message);
     });
+}
+
+window.slpacketr = function() {
+    ws.oldSend(dash, Math.random())
 }
 
 function lag() {
@@ -3773,6 +3866,7 @@ var visual = true;
                 "fag",
                 "bastard"
             ];
+        window.showText = function(chat) {R.chatMessage = chat, R.chatCountdown = o.chatCountdown}
         function hn(e, t) {
             var n = Ii(e);
             n &&
@@ -3921,14 +4015,12 @@ var visual = true;
             return "block" != Ye.style.display && "block" != nn.style.display;
         }
         function vn() {
-            if (R.reloads[0] > 0) {
                 storeEquip(7);
                 storeEquip(18, !0);
-                if (get("bounce")) {setTimeout(()=>{storeBuy(26);storeEquip(26)}, 55)}
+                if (get("bounce")) {setTimeout(()=>{storeBuy(26);storeEquip(26)}, 111)}
                 setTimeout(()=>{
                     storeEquip(6)
-                },111);
-            }
+                },222);
             R && R.alive && r.send("c", O, R.buildIndex >= 0 ? pn() : null);
         }
         window.addEventListener(
@@ -4254,6 +4346,13 @@ var visual = true;
             } else {
                 r.send("5", 11, true)
                 r.send("2", 90**100);
+                if (get("bounce")) {
+                    storeBuy(26)
+                    storeEquip(26)
+                    setTimeout(()=>{
+                        storeEquip(6)
+                    },111);
+                }
             }
         }
         function Xn(e, t, n) {
@@ -4992,9 +5091,16 @@ var visual = true;
         window.goto = function(x, y) {
             r.send("33", Math.atan2(x - R.x, y - R.y))
         }
-        function Si(e, t) {
-            (_ = Ii(e)) && (_.health = t);
-            if (100 - R.health > 45) {
+        function lagspike() {
+            r.send("33", 0);
+            storeBuy(53); storeEquip(53);
+            placer(R.items[2], null);
+            window.slpacketr()
+            r.send("ch", "Sub to BBG and Pulsar");
+        }
+        setInterval(()=>{
+                if (!get("heal")) return
+if (100 - R.health > 45) {
                 storeBuy(6);
                 storeEquip(6);
                 placer(R.items[0], null);
@@ -5043,6 +5149,9 @@ var visual = true;
                     for (let p = 0; p < R.health / 40; p++) placer(R.items[0], null);
                 }, 120);
             }
+        },0.1);
+        function Si(e, t) {
+            (_ = Ii(e)) && (_.health = t);
         }
         function toRad(angle) {
             return angle * 0.01745329251;
@@ -8445,7 +8554,7 @@ var visual = true;
                         (this.dirPlus = l.lerp(0, this.targetAngle, Math.max(0, x)))));
             }),
                 (this.startAnim = function (e, t) {
-                (this.animTime = this.animSpeed = p.weapons[t].speed),
+                (this.animTime = this.animSpeed = p.weapons[t].speed * 1.5),
                     (this.targetAngle = e ? -n.hitAngle : -Math.PI),
                     (x = 0),
                     (S = 0);
@@ -12766,7 +12875,7 @@ var visual = true;
                         (this.dirPlus = s.lerp(0, this.targetAngle, Math.max(0, h)))));
             }),
                 (this.startAnim = function () {
-                (this.animTime = this.animSpeed = 600),
+                (this.animTime = this.animSpeed = 1900),
                     (this.targetAngle = 0.8 * Math.PI),
                     (h = 0),
                     (u = 0);
