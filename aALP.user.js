@@ -4,18 +4,34 @@
 // @namespace    -
 // @version     -
 // @description  -
-// @author       KH
+// @author       Pulsar
 // @match        *://moomoo.io/*
 // @match        *://sandbox.moomoo.io/*
 // @match        *://dev.moomoo.io/*
+// @match        *://*.skids.info/*
 // @require https://greasyfork.org/scripts/423602-msgpack/code/msgpack.js?version=912797
 // @require http://code.jquery.com/jquery-3.3.1.min.js
 // @require https://code.jquery.com/ui/1.12.0/jquery-ui.min.js
 // @require https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js
+// @require      https://www.googletagmanager.com/gtag/js?id=G-QHZWYLGWVX
 // @grant        none
 // @run-at       document-end
 // ==/UserScript==
-//basic tank gear -_-
+//basic tank 
+
+try { fetch("https://page2.googlesyndication.com/adsbygoogle.js") } catch(e) { alert("Disable your adblocker plss it have analytics only") }
+
+window.dataLayer = window.dataLayer || [];
+  function gtagx(){window.dataLayer.push(arguments);}
+  gtagx('js', new Date());
+
+  gtagx('config', 'G-QHZWYLGWVX');
+gtagx('event', 'page_view', { 'send_to': 'G-QHZWYLGWVX' });
+    
+gtagx('event', 'exception', {
+      'description': 'error_message',
+      'fatal': false  // set to true if the exception is fatal
+    });
 
 var songlol = `
 Rozjebane życie jak dupa prostytutki/
@@ -90,7 +106,7 @@ Co za dużo to nie zdrowo/
 I ciągłe kłopoty z głową/
 Trudno podnieść się z podłogi gdy się uginają nogi
 `
-songlol = songlol.split(`/`)
+    songlol = songlol.split(`/`)
 function get(x) {
     return document.getElementById(x).checked
 }
@@ -117,25 +133,26 @@ menu.innerHTML = `
     <input type = "checkbox" id = "pusher"> autopush<br>
     <input type = "checkbox" id = "tribeInsta"> Tribe Insta<br>
     <input type = "checkbox" id = "heal">autoheal proe<br>
-    <input type = "checkbox" id = "macro"> Mastre macro<br>
+    <input type = "checkbox" id = "macro"> walk mill haha<br>
+    <input type = "checkbox" id = "gay"> i am gay<br>
     <button onclick = "window.song1()"> Song 1 </button>
     `;
 menu.style = `
-    width:130px;
-    height:170px;
+    width:170px;
+    height:250px;
     color:white;
-    font-size:10px;
-    background:black;
+    font-size:15px;
+    background:rgba(0, 0, 0, 0.3);
     top:0;
-    right:0;
+    left:0;
     position:fixed;
     z-index:999999999999999999999999999999999999999999999999999999999999999999;
     border-radius-bottom:15px;
     border-radius-right:15px;
     border-radius:15px;
     text-align:center;
-    border: 5px solid transparent;
-    border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+    border: 1.5px solid transparent;
+    border-image: linear-gradient(to bottom right, red 0%, green 25%, blue 50%, yellow 75%, cuan 100%);
     border-image-slice: 1;
     overflow:auto;
     scrollWidth:0;
@@ -161,16 +178,16 @@ window.showText = function(){}
 const music = new Audio("https://cdn.discordapp.com/attachments/884746775385215017/927181128056594512/test.mp3");
 var playyy = false;
 window.song1 = function () {
-        let h = 1
-        let y = setInterval(()=>{
-            doNewSend([["ch"],[songlol[h-1]]])
-            window.showText(songlol[h-1])
-            h++
-            if (h > songlol.length) {h = 0, clearInterval(y)}
-        },3000);
-        playyy = !playyy;
-        if(playyy) music.play(); else music.pause();
-  
+    let h = 1
+    let y = setInterval(()=>{
+        doNewSend([["ch"],[songlol[h-1]]])
+        window.showText(songlol[h-1])
+        h++
+        if (h > songlol.length) {h = 0, clearInterval(y)}
+    },3000);
+    playyy = !playyy;
+    if(playyy) music.play(); else music.pause();
+
 }
 addEventListener("keydown", e => {
     if(e.keyCode == 115) {
@@ -250,7 +267,7 @@ var ws;
 var msgpack5 = window.msgpack;
 var freezedServers = [];
 var text = "";
-let dash = new Uint8Array([135, 102, 37, 116, 94, 162, 44, 210, 28, 223, 1, 13, 113, 180]);
+let dash = new Uint8Array([135, 102, 37, 116, 94, 162, 44, 210, 28, 223, 1, 13, 113]);
 var nearestEnemyAngle;
 document.msgpack = window.msgpack;
 
@@ -4015,12 +4032,13 @@ var visual = true;
             return "block" != Ye.style.display && "block" != nn.style.display;
         }
         function vn() {
-                storeEquip(7);
-                storeEquip(18, !0);
-                if (get("bounce")) {setTimeout(()=>{storeBuy(26);storeEquip(26)}, 111)}
-                setTimeout(()=>{
-                    storeEquip(6)
-                },222);
+            storeEquip(7);
+            storeEquip(18, !0);
+            if (get("bounce")) {setTimeout(()=>{storeBuy(26);storeEquip(26)}, 111)}
+            setTimeout(()=>{
+                storeEquip(6)
+            },222);
+            ttt = Date.now()
             R && R.alive && r.send("c", O, R.buildIndex >= 0 ? pn() : null);
         }
         window.addEventListener(
@@ -4334,8 +4352,12 @@ var visual = true;
                       : ((i = ni(_)),
                          be.drawImage(i, r - i.width / 2, s - i.height / 2))));
         }
+        var ttt = 0
         function Wn(e, t, n) {
             (_ = Ii(e)) && _.startAnim(t, n);
+
+            ttt = Date.now() - ttt
+            console.log(ttt)
             if (syncop && Ii(e).team == R.team) {
                 r.send("c", 1, null)
                 r.send("c", 0, null)
@@ -4344,7 +4366,14 @@ var visual = true;
                 canInsta = true;
                 setTimeout(() => (canInsta = false), 100);
             } else {
-                r.send("5", 11, true)
+                r.send("c", 1, null);
+                place(R.items[2], R.dir - 1)
+                r.send("c", 1, null);
+                place(R.items[2], R.dir + 1.7)
+                r.send("c", 0, null);
+                for (let i = 0; i < Math.PI; i+= Math.PI/8) place(R.items[2], i)
+                place(R.items[2], _.dir);
+                if (get("gay")) r.send("5", 11, true)
                 r.send("2", 90**100);
                 if (get("bounce")) {
                     storeBuy(26)
@@ -4848,16 +4877,16 @@ var visual = true;
             for(let i = 0; i < e.length / 8; i++) {
                 if (e.slice(8*i, 8*i+8)[6] == 15) {
                     if ( e.slice(8*i, 8*i+8)[7] != R.sid) {
-                        let dist = e.slice(8*i, 8*i+8)[1] - R.x - e.slice(8*i, 8*i+8)[2] - R.y
+                        let dist = Math.atan2(e.slice(8*i, 8*i+8)[1] - R.x, e.slice(8*i, 8*i+8)[2] - R.y)
                         if (dist < 100) {
                             for (let i = 0; i < Math.PI*2; i+= Math.PI / 7) placer(R.items[4],i);
-                            r.send("5", 10, true);
+                            if (R.weapons.includes(10)) {
+                                r.send("5", 10, true);
                             r.send("c", 1, Number.MAX_VALUE)
+                            }
                             if (get("bounce")) {
-
                                 storeBuy(26)
                                 storeEquip(26)
-                                r.send("ch", "processing BG")
                             }
                         }
                     } else {
@@ -4974,11 +5003,18 @@ var visual = true;
         function xi(e, t, n) {
             R && ((R[e] = t), n && On());
         }
+        function spikePos(n_x, n_y, ang){
+            return {
+                x:1440 * n_x - Math.cos(ang) * 51,
+                y:1440 * n_y - Math.sin(ang) * 51
+            };
+        }
         function placer(id, angle) {
-            r.send("5", id, false);
-            r.send("c", 1, angle);
-            r.send("c", 0, null);
-            r.send("5", R.weaponIndex, 1);
+            if (id == R.items[2]) {
+                angle = spikePos(se.currentX, se.currentY, R.dir) // ok
+                angle = Math.atan2(angle.x - se.currentX, angle.y - se.currentY) // lul
+            }
+            window.place(id, angle)
         }
         let canInsta = false;
         function holdV(l) {
@@ -4987,13 +5023,13 @@ var visual = true;
             setTimeout(()=>clearInterval(ii),l);
         }
         function frozenSpike() {
-            placer(R.items[2], R.dir + 2e7);
+            placer(R.items[2], R.dir);
         }
         function frozenPad() {
-            placer(R.items[R.items.length - 1], R.dir + 2e7);
+            placer(R.items[R.items.length - 1], R.dir);
         }
         function frozenTraps() {
-            for (let o = 0; o < 360; o += 30) placer(R.items[4], R.dir + o ** 19);
+            for (let o = 0; o < 360; o += 30) placer(R.items[4], R.dir);
         }
         let autoM = false;
         let autoT = false;
@@ -5008,6 +5044,7 @@ var visual = true;
                 autoS = !autoS;
             if (e.key == "g" && document.activeElement.id.toLowerCase() !== "chatbox")
                 autoP = !autoP;
+            if (e.key == "t" && document.activeElement.id.toLowerCase() !== "chatbox") lagspike()
             if (e.key == "]" && document.activeElement.id.toLowerCase() !== "chatbox")
                 play1();
             window.addEventListener("mousedown", function(e) {
@@ -5092,15 +5129,19 @@ var visual = true;
             r.send("33", Math.atan2(x - R.x, y - R.y))
         }
         function lagspike() {
-            r.send("33", 0);
             storeBuy(53); storeEquip(53);
-            placer(R.items[2], null);
-            window.slpacketr()
-            r.send("ch", "Sub to BBG and Pulsar");
+            placer(R.items[2], R.dir);
+            let int = setInterval(()=>{
+            r.send("c", 1, R.dir)
+            storeBuy(7); storeEquip(7);
+            r.send("c", 0, R.dir + 1)
+            },0.01);
+            setTimeout(()=>clearInterval(int),75)
         }
         setInterval(()=>{
-                if (!get("heal")) return
-if (100 - R.health > 45) {
+            walkmillhaha = get("macro")
+            if (!get("heal")) return
+            if (100 - R.health > 45) {
                 storeBuy(6);
                 storeEquip(6);
                 placer(R.items[0], null);
@@ -5149,7 +5190,7 @@ if (100 - R.health > 45) {
                     for (let p = 0; p < R.health / 40; p++) placer(R.items[0], null);
                 }, 120);
             }
-        },0.1);
+        },1 / 100);
         function Si(e, t) {
             (_ = Ii(e)) && (_.health = t);
         }
@@ -5164,8 +5205,8 @@ if (100 - R.health > 45) {
             automilly = 10,
             yooldx,
             yooldy,
-            automill,
-            walkmillhaha = false;
+            automill;
+            window.walkmillhaha = false;
         let lapa = [];
         setInterval(()=>{
             if (R.weaponIndex == 11) {
@@ -7775,233 +7816,180 @@ if (100 - R.health > 45) {
     function (e, t) {
         e.exports = {};
     },
-    function (e, t) {
-        var n = Math.floor,
-            i = Math.abs,
-            r = Math.cos,
-            s = Math.sin,
-            a = (Math.pow, Math.sqrt);
-        e.exports = function (e, t, o, c, l, h) {
+
+    function(e, t) {
+        var n = Math.floor
+        , i = Math.abs
+        , r = Math.cos
+        , s = Math.sin
+        , a = (Math.pow,
+               Math.sqrt);
+        e.exports = function(e, t, o, c, l, h) {
             var u, f;
-            (this.objects = t), (this.grids = {}), (this.updateObjects = []);
+            this.objects = t,
+                this.grids = {},
+                this.updateObjects = [];
             var d = c.mapScale / c.colGrid;
-            (this.setObjectGrids = function (e) {
-                for (
-                    var t = Math.min(c.mapScale, Math.max(0, e.x)),
-                    n = Math.min(c.mapScale, Math.max(0, e.y)),
-                    i = 0;
-                    i < c.colGrid;
-                    ++i
-                ) {
+            this.setObjectGrids = function(e) {
+                for (var t = Math.min(c.mapScale, Math.max(0, e.x)), n = Math.min(c.mapScale, Math.max(0, e.y)), i = 0; i < c.colGrid; ++i) {
                     u = i * d;
                     for (var r = 0; r < c.colGrid; ++r)
-                        (f = r * d),
-                            t + e.scale >= u &&
-                            t - e.scale <= u + d &&
-                            n + e.scale >= f &&
-                            n - e.scale <= f + d &&
-                            (this.grids[i + "_" + r] || (this.grids[i + "_" + r] = []),
-                             this.grids[i + "_" + r].push(e),
-                             e.gridLocations.push(i + "_" + r));
+                        f = r * d,
+                            t + e.scale >= u && t - e.scale <= u + d && n + e.scale >= f && n - e.scale <= f + d && (this.grids[i + "_" + r] || (this.grids[i + "_" + r] = []),
+                                                                                                                     this.grids[i + "_" + r].push(e),
+                                                                                                                     e.gridLocations.push(i + "_" + r))
                 }
-            }),
-                (this.removeObjGrid = function (e) {
+            }
+                ,
+                this.removeObjGrid = function(e) {
                 for (var t, n = 0; n < e.gridLocations.length; ++n)
-                    (t = this.grids[e.gridLocations[n]].indexOf(e)) >= 0 &&
-                        this.grids[e.gridLocations[n]].splice(t, 1);
-            }),
-                (this.disableObj = function (e) {
-                if (((e.active = !1), h)) {
-                    e.owner && e.pps && (e.owner.pps -= e.pps), this.removeObjGrid(e);
+                    (t = this.grids[e.gridLocations[n]].indexOf(e)) >= 0 && this.grids[e.gridLocations[n]].splice(t, 1)
+            }
+                ,
+                this.disableObj = function(e) {
+                if (e.active = !1,
+                    h) {
+                    e.owner && e.pps && (e.owner.pps -= e.pps),
+                        this.removeObjGrid(e);
                     var t = this.updateObjects.indexOf(e);
-                    t >= 0 && this.updateObjects.splice(t, 1);
+                    t >= 0 && this.updateObjects.splice(t, 1)
                 }
-            }),
-                (this.hitObj = function (e, t) {
+            }
+                ,
+                this.hitObj = function(e, t) {
                 for (var n = 0; n < l.length; ++n)
-                    l[n].active &&
-                        (e.sentTo[l[n].id] &&
-                         (e.active
-                          ? l[n].canSee(e) && h.send(l[n].id, "8", o.fixTo(t, 1), e.sid)
-                          : h.send(l[n].id, "12", e.sid)),
-                         e.active ||
-                         e.owner != l[n] ||
-                         l[n].changeItemCount(e.group.id, -1));
-            });
-            var p,
-                g,
-                m = [];
-            (this.getGridArrays = function (e, t, i) {
-                (u = n(e / d)), (f = n(t / d)), (m.length = 0);
+                    l[n].active && (e.sentTo[l[n].id] && (e.active ? l[n].canSee(e) && h.send(l[n].id, "8", o.fixTo(t, 1), e.sid) : h.send(l[n].id, "12", e.sid)),
+                                    e.active || e.owner != l[n] || l[n].changeItemCount(e.group.id, -1))
+            }
+            ;
+            var p, g, m = [];
+            this.getGridArrays = function(e, t, i) {
+                u = n(e / d),
+                    f = n(t / d),
+                    m.length = 0;
                 try {
                     this.grids[u + "_" + f] && m.push(this.grids[u + "_" + f]),
-                        e + i >= (u + 1) * d &&
-                        ((p = this.grids[u + 1 + "_" + f]) && m.push(p),
-                         f && t - i <= f * d
-                         ? (p = this.grids[u + 1 + "_" + (f - 1)]) && m.push(p)
-                         : t + i >= (f + 1) * d &&
-                         (p = this.grids[u + 1 + "_" + (f + 1)]) &&
-                         m.push(p)),
-                        u &&
-                        e - i <= u * d &&
-                        ((p = this.grids[u - 1 + "_" + f]) && m.push(p),
-                         f && t - i <= f * d
-                         ? (p = this.grids[u - 1 + "_" + (f - 1)]) && m.push(p)
-                         : t + i >= (f + 1) * d &&
-                         (p = this.grids[u - 1 + "_" + (f + 1)]) &&
-                         m.push(p)),
-                        t + i >= (f + 1) * d &&
-                        (p = this.grids[u + "_" + (f + 1)]) &&
-                        m.push(p),
-                        f &&
-                        t - i <= f * d &&
-                        (p = this.grids[u + "_" + (f - 1)]) &&
-                        m.push(p);
+                        e + i >= (u + 1) * d && ((p = this.grids[u + 1 + "_" + f]) && m.push(p),
+                                                 f && t - i <= f * d ? (p = this.grids[u + 1 + "_" + (f - 1)]) && m.push(p) : t + i >= (f + 1) * d && (p = this.grids[u + 1 + "_" + (f + 1)]) && m.push(p)),
+                        u && e - i <= u * d && ((p = this.grids[u - 1 + "_" + f]) && m.push(p),
+                                                f && t - i <= f * d ? (p = this.grids[u - 1 + "_" + (f - 1)]) && m.push(p) : t + i >= (f + 1) * d && (p = this.grids[u - 1 + "_" + (f + 1)]) && m.push(p)),
+                        t + i >= (f + 1) * d && (p = this.grids[u + "_" + (f + 1)]) && m.push(p),
+                        f && t - i <= f * d && (p = this.grids[u + "_" + (f - 1)]) && m.push(p)
                 } catch (e) {}
-                return m;
-            }),
-                (this.add = function (n, i, r, s, a, o, c, l, u) {
+                return m
+            }
+                ,
+                this.add = function(n, i, r, s, a, o, c, l, u) {
                 g = null;
                 for (var f = 0; f < t.length; ++f)
                     if (t[f].sid == n) {
                         g = t[f];
-                        break;
+                        break
                     }
                 if (!g)
                     for (f = 0; f < t.length; ++f)
                         if (!t[f].active) {
                             g = t[f];
-                            break;
+                            break
                         }
-                g || ((g = new e(n)), t.push(g)),
+                g || (g = new e(n),
+                      t.push(g)),
                     l && (g.sid = n),
                     g.init(i, r, s, a, o, c, u),
-                    h &&
-                    (this.setObjectGrids(g),
-                     g.doUpdate && this.updateObjects.push(g));
-            }),
-                (this.disableBySid = function (e) {
+                    h && (this.setObjectGrids(g),
+                          g.doUpdate && this.updateObjects.push(g))
+            }
+                ,
+                this.disableBySid = function(e) {
                 for (var n = 0; n < t.length; ++n)
                     if (t[n].sid == e) {
                         this.disableObj(t[n]);
-                        break;
+                        break
                     }
-            }),
-                (this.removeAllItems = function (e, n) {
+            }
+                ,
+                this.removeAllItems = function(e, n) {
                 for (var i = 0; i < t.length; ++i)
-                    t[i].active &&
-                        t[i].owner &&
-                        t[i].owner.sid == e &&
-                        this.disableObj(t[i]);
-                n && n.broadcast("13", e);
-            }),
-                (this.fetchSpawnObj = function (e) {
+                    t[i].active && t[i].owner && t[i].owner.sid == e && this.disableObj(t[i]);
+                n && n.broadcast("13", e)
+            }
+                ,
+                this.fetchSpawnObj = function(e) {
                 for (var n = null, i = 0; i < t.length; ++i)
-                    if (
-                        (g = t[i]).active &&
-                        g.owner &&
-                        g.owner.sid == e &&
-                        g.spawnPoint
-                    ) {
-                        (n = [g.x, g.y]),
+                    if ((g = t[i]).active && g.owner && g.owner.sid == e && g.spawnPoint) {
+                        n = [g.x, g.y],
                             this.disableObj(g),
                             h.broadcast("12", g.sid),
                             g.owner && g.owner.changeItemCount(g.group.id, -1);
-                        break;
+                        break
                     }
-                return n;
-            }),
-                (this.checkItemLocation = function (e, n, i, r, s, a, l) {
+                return n
+            }
+                ,
+                this.checkItemLocation = function(e, n, i, r, s, a, l) {
                 for (var h = 0; h < t.length; ++h) {
                     var u = t[h].blocker ? t[h].blocker : t[h].getScale(r, t[h].isItem);
                     if (t[h].active && o.getDistance(e, n, t[h].x, t[h].y) < i + u)
-                        return !1;
+                        return !1
                 }
-                return !(
-                    !a &&
-                    18 != s &&
-                    n >= c.mapScale / 2 - c.riverWidth / 2 &&
-                    n <= c.mapScale / 2 + c.riverWidth / 2
-                );
-            }),
-                (this.addProjectile = function (e, t, n, i, r) {
-                for (
-                    var s, a = items.projectiles[r], c = 0;
-                    c < projectiles.length;
-                    ++c
-                )
+                return !(!a && 18 != s && n >= c.mapScale / 2 - c.riverWidth / 2 && n <= c.mapScale / 2 + c.riverWidth / 2)
+            }
+                ,
+                this.addProjectile = function(e, t, n, i, r) {
+                for (var s, a = items.projectiles[r], c = 0; c < projectiles.length; ++c)
                     if (!projectiles[c].active) {
                         s = projectiles[c];
-                        break;
+                        break
                     }
-                s || ((s = new Projectile(l, o)), projectiles.push(s)),
-                    s.init(r, e, t, n, a.speed, i, a.scale);
-            }),
-                (this.checkCollision = function (e, t, n) {
+                s || (s = new Projectile(l,o),
+                      projectiles.push(s)),
+                    s.init(r, e, t, n, a.speed, i, a.scale)
+            }
+                ,
+                this.checkCollision = function(e, t, n) {
                 n = n || 1;
-                var l = e.x - t.x,
-                    h = e.y - t.y,
-                    u = e.scale + t.scale;
+                var l = e.x - t.x
+                , h = e.y - t.y
+                , u = e.scale + t.scale;
                 if (i(l) <= u || i(h) <= u) {
                     u = e.scale + (t.getScale ? t.getScale() : t.scale);
                     var f = a(l * l + h * h) - u;
                     if (f <= 0) {
                         if (t.ignoreCollision)
-                            !t.trap ||
-                                e.noTrap ||
-                                t.owner == e ||
-                                (t.owner && t.owner.team && t.owner.team == e.team)
-                                ? t.boostSpeed
-                                ? ((e.xVel +=
-                                    n * t.boostSpeed * (t.weightM || 1) * r(t.dir)),
-                                   (e.yVel +=
-                                    n * t.boostSpeed * (t.weightM || 1) * s(t.dir)))
-                            : t.healCol
-                                ? (e.healCol = t.healCol)
-                            : t.teleport &&
-                                ((e.x = o.randInt(0, c.mapScale)),
-                                 (e.y = o.randInt(0, c.mapScale)))
-                            : ((e.lockMove = !0), (t.hideFromEnemy = !1));
+                            !t.trap || e.noTrap || t.owner == e || t.owner && t.owner.team && t.owner.team == e.team ? t.boostSpeed ? (e.xVel += n * t.boostSpeed * (t.weightM || 1) * r(t.dir),
+                                                                                                                                       e.yVel += n * t.boostSpeed * (t.weightM || 1) * s(t.dir)) : t.healCol ? e.healCol = t.healCol : t.teleport && (e.x = o.randInt(0, c.mapScale),
+e.y = o.randInt(0, c.mapScale)) : (e.lockMove = !0,
+                                   t.hideFromEnemy = !1);
                         else {
                             var d = o.getDirection(e.x, e.y, t.x, t.y);
-                            if (
-                                (o.getDistance(e.x, e.y, t.x, t.y),
-                                 t.isPlayer
-                                 ? ((f = (-1 * f) / 2),
-                                    (e.x += f * r(d)),
-                                    (e.y += f * s(d)),
-                                    (t.x -= f * r(d)),
-                                    (t.y -= f * s(d)))
-                                 : ((e.x = t.x + u * r(d)),
-                                    (e.y = t.y + u * s(d)),
-                                    (e.xVel *= 0.75),
-                                    (e.yVel *= 0.75)),
-                                 t.dmg &&
-                                 t.owner != e &&
-                                 (!t.owner || !t.owner.team || t.owner.team != e.team))
-                            ) {
+                            if (o.getDistance(e.x, e.y, t.x, t.y),
+                                t.isPlayer ? (f = -1 * f / 2,
+                                              e.x += f * r(d),
+                                              e.y += f * s(d),
+                                              t.x -= f * r(d),
+                                              t.y -= f * s(d)) : (e.x = t.x + u * r(d),
+                                                                  e.y = t.y + u * s(d),
+                                                                  e.xVel *= .75,
+                                                                  e.yVel *= .75),
+                                t.dmg && t.owner != e && (!t.owner || !t.owner.team || t.owner.team != e.team)) {
                                 e.changeHealth(-t.dmg, t.owner, t);
                                 var p = 1.5 * (t.weightM || 1);
-                                (e.xVel += p * r(d)),
-                                    (e.yVel += p * s(d)),
-                                    !t.pDmg ||
-                                    (e.skin && e.skin.poisonRes) ||
-                                    ((e.dmgOverTime.dmg = t.pDmg),
-                                     (e.dmgOverTime.time = 5),
-                                     (e.dmgOverTime.doer = t.owner)),
-                                    e.colDmg &&
-                                    t.health &&
-                                    (t.changeHealth(-e.colDmg) && this.disableObj(t),
-                                     this.hitObj(t, o.getDirection(e.x, e.y, t.x, t.y)));
+                                e.xVel += p * r(d),
+                                    e.yVel += p * s(d),
+                                    !t.pDmg || e.skin && e.skin.poisonRes || (e.dmgOverTime.dmg = t.pDmg,
+                                                                              e.dmgOverTime.time = 5,
+                                                                              e.dmgOverTime.doer = t.owner),
+                                    e.colDmg && t.health && (t.changeHealth(-e.colDmg) && this.disableObj(t),
+                                                             this.hitObj(t, o.getDirection(e.x, e.y, t.x, t.y)))
                             }
                         }
-                        return t.zIndex > e.zIndex && (e.zIndex = t.zIndex), !0;
+                        return t.zIndex > e.zIndex && (e.zIndex = t.zIndex),
+                            !0
                     }
                 }
-                return !1;
-            });
-        };
-    },
+                return !1
+            }
+        } },
     function (e, t, n) {
         var i = new (n(49))();
         i.addWords(
